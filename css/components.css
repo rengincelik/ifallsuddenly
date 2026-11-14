@@ -266,3 +266,136 @@ sup { line-height: 0; }
   .question-text { font-size: 1.15rem; }
   .btn { padding: .75rem 1.1rem; }
 }
+
+/* ===== Narkolepsi: tanım (kutusuz) + belirti akışı ===== */
+
+/* Tanım paragrafı kutusuz durur. Uzun metin solda hizalı okunur. */
+.rich-intro {
+	text-align: left;
+	max-width: 46rem;
+	margin: 1rem auto 0;
+}
+.rich-intro > :first-child { margin-top: 0; }
+
+/* Belirti akışı: gündüzden geceye, belirti başına bir kart.
+   Akışın iki ucu burada ayarlanır: --flow-start sabah sarısı, --flow-end temanın vurgu rengi. */
+.symptoms { margin-top: 2.5rem; }
+.symptoms-title { margin: 0 0 .5rem; }
+.symptoms-lead { max-width: 40rem; margin: 0 auto; }
+
+.symptom-flow {
+	--flow-start: #f2b84b;
+	--flow-end: var(--accent-strong);
+
+	list-style: none;
+	margin: 1.5rem 0 0;
+	padding: 0 0 0 2rem;
+	display: grid;
+	gap: 1rem;
+	position: relative;
+	text-align: left;
+}
+
+/* Mobil: dikey akış çizgisi */
+.symptom-flow::before {
+	content: "";
+	position: absolute;
+	left: .55rem;
+	top: 0;
+	bottom: 0;
+	width: .25rem;
+	border-radius: 999px;
+	background: linear-gradient(to bottom, var(--flow-start), var(--flow-end));
+}
+
+.symptom {
+	/* --p (0%..100%) symptoms.js'ten gelir: kartın akıştaki konumu */
+	--c: color-mix(in srgb, var(--flow-start), var(--flow-end) var(--p, 0%));
+	position: relative;
+	padding: 1rem 1.1rem 1.1rem;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-top: 4px solid var(--c);
+	border-radius: var(--radius);
+}
+
+.symptom::before {
+	content: "";
+	position: absolute;
+	left: -1.85rem;
+	top: 1.2rem;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	background: var(--c);
+	border: 3px solid var(--bg);
+	box-shadow: 0 0 0 2px var(--c);
+}
+
+/* Görsel alanı: görsel yoksa kesik çizgili yer tutucu. Oran symptoms.js > IMG_W/IMG_H ile aynı (4:3). */
+.symptom-media {
+	aspect-ratio: 4 / 3;
+	margin: 0 0 .9rem;
+	border-radius: calc(var(--radius) - 4px);
+	overflow: hidden;
+	background: color-mix(in srgb, var(--c) 12%, var(--surface));
+}
+.symptom-media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.symptom-media.is-placeholder {
+	display: grid;
+	place-items: center;
+	border: 1.5px dashed color-mix(in srgb, var(--c) 55%, var(--border));
+	color: color-mix(in srgb, var(--c) 70%, var(--muted));
+}
+
+.symptom-when {
+	display: inline-block;
+	margin: 0 0 .5rem;
+	padding: .2rem .65rem;
+	border-radius: 999px;
+	font-size: .8rem;
+	font-weight: 600;
+	color: var(--text);
+	background: color-mix(in srgb, var(--c) 22%, var(--surface));
+}
+
+.symptom-title { margin: 0 0 .4rem; font-size: 1.05rem; line-height: 1.3; }
+.symptom-body { margin: 0; font-size: .95rem; line-height: 1.55; color: var(--muted); }
+
+.symptoms-note {
+	max-width: 46rem;
+	margin: 1.5rem auto 0;
+	font-size: .9rem;
+	line-height: 1.55;
+	text-align: left;
+}
+
+/* Akış görünürse kutuyla arasına boşluk (gizliyse kutunun kendi boşluğu kalır) */
+.symptoms:not([hidden]) + .scroll-box { margin-top: 2.5rem; }
+
+/* Masaüstü: 5 sütun, yatay akış. .scroll-box gibi .container'dan taşarak ortalanır. */
+@media (min-width: 64rem) {
+	.symptom-flow {
+		--flow-w: clamp(56rem, 90vw, 80rem);
+		width: var(--flow-w);
+		margin-inline: calc((100% - var(--flow-w)) / 2);
+		grid-template-columns: repeat(5, 1fr);
+		gap: .9rem;
+		padding: 2.2rem 0 0;
+	}
+	.symptom-flow::before {
+		left: 0;
+		right: 0;
+		top: .45rem;
+		bottom: auto;
+		width: auto;
+		height: .25rem;
+		background: linear-gradient(to right, var(--flow-start), var(--flow-end));
+	}
+	.symptom::before { left: 1.1rem; top: -2.125rem; }
+}

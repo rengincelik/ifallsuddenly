@@ -99,6 +99,21 @@
 	<section id="narcolepsy" class="section">
 		<div class="container">
 			<h2 id="narcolepsy-title" data-i18n="narcolepsy.title"></h2>
+
+			<!-- Tanım: kutusuz kısa giriş (richtext.js, narcolepsy.intro). Kendi kaynak numaraları vardır. -->
+			<div class="rich-intro" data-rich-block="narcolepsy-intro">
+				<div data-i18n-rich-list="narcolepsy.intro"></div>
+				<div class="refs" data-refs hidden></div>
+			</div>
+
+			<!-- Belirti akışı: symptoms.js doldurur (narcolepsy.symptoms), veri yoksa gizli kalır -->
+			<div class="symptoms" id="symptoms" role="region" aria-labelledby="symptoms-title" hidden>
+				<h3 class="symptoms-title" id="symptoms-title"></h3>
+				<p class="symptoms-lead" hidden></p>
+				<ol class="symptom-flow" data-symptom-list></ol>
+				<p class="symptoms-note muted" hidden></p>
+			</div>
+
 			<div class="scroll-box" data-rich-block="narcolepsy" tabindex="0" role="region" aria-labelledby="narcolepsy-title">
 				<div data-i18n-rich-list="narcolepsy.body"></div>
 				<div class="refs" data-refs hidden></div>

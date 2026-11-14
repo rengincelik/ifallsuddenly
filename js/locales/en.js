@@ -1,12 +1,12 @@
 // İngilizce (varsayılan dil). Başka dillerde eksik kalan anahtarlar buradan gelir.
 export default {
   meta: {
-    title: "Still Tired",
+    title: "I Fall Suddenly",
     description: "Sleep isn’t always as simple as it seems.",
     dateLocale: "en-GB",
   },
 
-  site: { name: "Still Tired" },
+  site: { name: "I Fall Suddenly" },
 
   nav: {
     aria: "Main menu",
@@ -25,10 +25,13 @@ export default {
   },
 
 	about: {
-		lead: "For as long as I can remember, I was constantly exhausted and sleepy. I could fall asleep anytime, anywhere. Yet every time I saw a doctor, I got the exact same response: 'Everything looks fine, nothing is wrong.'",
-		big: "In the end, I finally found the answer: I was right all along, there was a real problem.",
-		p1: "I built this page for anyone who might be in the same boat. Below, you'll find two screening tests. The Epworth Sleepiness Scale (ESS) measures general daytime sleepiness, while the Swiss Narcolepsy Scale (SNS) focuses specifically on Type 1 narcolepsy symptoms. These tests don't diagnose anything; they only help you judge whether it's worth seeing a specialist.",
-		p2: "Sleep matters for health, yet it's often overlooked. If you have even a passing suspicion about your daytime exhaustion, these short tests might give you some clarity. Excessive sleepiness can have many different causes, so if your symptoms persist, whatever your results, I'd recommend seeing a specialist. You can find a more detailed breakdown of narcolepsy further down the page."
+		lead: "Experiencing cataplexy is an odd thing, but describing it is even odder. That is exactly where a single phrase changed my life: sudden loss of muscle control.",
+		p1: "I'd had problems with sleep for almost as long as I can remember. But I never imagined that the muscle control losses I'd been having for 15 years could be related to sleep. I had grown afraid of going to sleep at night. I was having sleep paralysis and hallucinations, but I didn't know what they were, and I had no words to describe them.",
+		p2: "Then I looked that phrase up. I listed every other symptom I had, related or not, and researched them one by one. Where they all overlapped, I found narcolepsy type 1. I checked for other possibilities too, but sudden loss of muscle control is an almost unique sign of this disease. Finding out what was happening to me, and why, was a relief. They say knowing the name takes away half the fear.",
+		p3: "I researched which specialist to see and which symptoms to describe to the doctor, had the necessary tests done, and got my diagnosis. I'm now in treatment. Treatment decisions are personal and should be made under a doctor's supervision, so I don't go into medication details on this page.",
+		p4: "While researching, I came across these tests and saw that my results were in line with those of people who have this condition. Narcolepsy is not easy to spot in primary care. Its symptoms can be overlooked, it doesn't show up in general screenings, and diagnosis requires specialised tests. It struck me that even a simple questionnaire could give such an important clue.",
+		p5: "I was ignoring my symptoms too. I wasn't one of the extreme examples shown in the news or in films, and in 15 years nobody I met ever said, 'this could be an illness.' So the real question is this: is the problem you're having short-lived and temporary, or has it been going on for a long time and needs to be taken seriously? I made this page so these tests can give you an idea. They don't diagnose anything, but they may help you decide whether to knock on the right door.",
+		big: "I found it with a single phrase. This site exists so that someone searching for that phrase can get there faster.",
 	},
   home: {
 	  title: "<span>Can't sleep at night.</span> <span>Can't stay awake by day.</span>",
@@ -38,13 +41,47 @@ export default {
     tests: "tests completed",
   },
 
-  // body: paragraf dizisi. "## " ile başlayan satır başlık olur. [@anahtar] kaynak numarası ekler (js/references.js).
-  narcolepsy: {
-    title: "Narcolepsy",tocLabel: "Sections",
+	narcolepsy: {
+		title: "Narcolepsy",tocLabel: "Sections",
+
+		intro: [
+			"Narcolepsy is a chronic neurological disorder of hypersomnolence in which the brain cannot properly regulate the sleep-wake cycle.[@scammell2015][@bassetti2021] It usually begins in the teenage years or young adulthood and stays for life.[@dauvilliers2007]",
+			"Narcolepsy with cataplexy affects roughly 0.02% of adults worldwide, about 1 in 2,000.[@dauvilliers2007] Symptoms are often not recognized as narcolepsy, and studies report an average delay of up to 15 years before the diagnosis is made.[@thorpy2014]",
+		],
+
+		symptoms: {
+			title: "The 5 main symptoms of narcolepsy",
+			lead: "Symptoms usually fall into five groups. Not everyone has all of them, and the order they appear in can vary. The flow below shows when in the day each one can show up.",
+			items: [
+				{
+					when: "All day",
+					title: "Excessive daytime sleepiness",
+					body: "A heavy sleepiness that builds during the day even after enough sleep. Short, hard-to-resist sleep attacks can happen while talking, eating or working. A short nap often feels refreshing for a while.",
+				},
+				{
+					when: "Strong emotions",
+					title: "Cataplexy",
+					body: "A sudden loss of muscle strength triggered by emotions such as laughter, surprise or excitement. The jaw may drop or the knees may give way. The person stays conscious, and it usually lasts from seconds to a couple of minutes. It does not occur in every type of narcolepsy.",
+				},
+				{
+					when: "Sleep transitions",
+					title: "Hallucinations",
+					body: "Images, sounds or a feeling that someone is in the room, appearing as sleep begins or ends. The person usually realizes afterwards that they were not real, but in the moment they can be frightening.",
+				},
+				{
+					when: "Sleep transitions",
+					title: "Sleep paralysis",
+					body: "Being unable to move or speak while the mind is awake. The person is conscious but cannot move. It usually lasts from a few seconds to a few minutes and passes by itself.",
+				},
+				{
+					when: "At night",
+					title: "Disrupted nighttime sleep",
+					body: "Frequent awakenings and light, fragmented sleep during the night. Broken night sleep despite such strong daytime sleepiness is one of the typical features of narcolepsy.",
+				},
+			],
+			note: "Having one of these symptoms does not mean a person has narcolepsy; sleep paralysis and hallucinations can also happen from time to time in people without it. The tests on this site do not diagnose. If symptoms affect daily life, it is worth seeing a sleep specialist.",
+		},
     body: [
-		"## Overview ",
-      "Narcolepsy is a chronic neurological disorder of hypersomnolence in which the brain cannot properly regulate the sleep-wake cycle.[@scammell2015][@bassetti2021] It usually begins in the teenage years or young adulthood and stays for life.[@dauvilliers2007]",
-      "Narcolepsy with cataplexy affects roughly 0.02% of adults worldwide, about 1 in 2,000.[@dauvilliers2007] Symptoms are often not recognized as narcolepsy, and studies report an average delay of up to 15 years before the diagnosis is made.[@thorpy2014]",
 
       "## Cause",
       "The hallmark of Type 1 narcolepsy is the loss of orexin (hypocretin) neurons in the lateral hypothalamus.[@nishino2000][@thannickal2000] The most likely explanation is an autoimmune process.[@dauvilliers2007][@bassetti2021]",

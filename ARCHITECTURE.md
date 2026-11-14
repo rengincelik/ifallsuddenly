@@ -17,7 +17,7 @@ assets/
 css/
   base.css          değişkenler (renk, font, ölçü), açık/koyu tema, reset, tipografi
   layout.css        container, sabit header, nav, dil bayrakları + tema butonu, bölümler, footer, mobil header
-  components.css    buton, ilerleme çubuğu, kayar sorular, seçenekler, kazı-kazan
+  components.css    buton, ilerleme çubuğu, kayar sorular, seçenekler, metin kutusu, narkolepsi tanımı + belirti akışı, kazı-kazan
 js/
   main.js           giriş noktası, modülleri bağlar, seçili testi yönetir
   config.js         dilden bağımsız ayarlar (AUTHOR, TESTS, DEFAULT_TEST, STATS)
@@ -32,6 +32,7 @@ js/
   stats.js          sayaç: Worker'a sayım + sayıları okuma, GoatCounter'a arka plan sayımı
   richtext.js       alıntılı metin ([@anahtar]), kaynak listesi
   references.js     kaynak kayıtları (REFERENCES)
+  symptoms.js       narkolepsi belirti akışı (narcolepsy.symptoms), belirti başına bir kart
   quiz.js           adım adım test (birden fazla testi taşır)
   result.js         sonuç paneli, PDF özeti
   scratch.js        kazı-kazan canvas
@@ -63,6 +64,7 @@ main.js
  ├─ share.js ─────────── i18n.js
  ├─ stats.js ─────────── config.js (STATS), i18n.js
  ├─ richtext.js ──────── references.js, i18n.js
+ ├─ symptoms.js ──────── i18n.js
  ├─ quiz.js ──────────── i18n.js          (testler main.js'ten parametre olarak gelir)
  └─ result.js ────────── config.js (TESTS)
                           scoring.js     (config'e bağımlı değil, scoring nesnesi parametre)
@@ -73,7 +75,7 @@ main.js
 Başlatma sırası (`main.js`):
 
 1. `await initI18n()`
-2. `initLangSwitch()`, `initTheme()`, `initSite()`, `initNav()`, `initShare()`, `initRichText()`
+2. `initLangSwitch()`, `initTheme()`, `initSite()`, `initNav()`, `initShare()`, `initRichText()`, `initSymptoms()`
 3. `initStats()` (beklenmez, sayılar gelince kutu kendi açılır)
 4. `createResult({...})`
 5. `createQuiz({ tests: TESTS, initialTest: DEFAULT_TEST, ... })`; `onFinish(answers, id)` içinde `finished.set`, `trackTestCompleted(id)`, sonra `result.show(answers, id)`
@@ -112,7 +114,8 @@ Açılışta hiçbir şey kaydedilmez (`setLang(..., { persist: false })`). Tara
 | `theme.js` | `label` | tema butonunun `title`'ını yeni dilde yazar |
 | `site.js` | `renderFooter` | footer'ı yeniden çizer |
 | `share.js` | `update` | link `href`'ini yeniden kurar |
-| `richtext.js` | `renderAll` | Hakkımda ve Narkolepsi metinlerini, alıntı numaralarını ve kaynak listelerini yeniden çizer |
+| `richtext.js` | `renderAll` | Hakkımda ve Narkolepsi metinlerini (tanım girişi dahil), alıntı numaralarını ve kaynak listelerini yeniden çizer |
+| `symptoms.js` | `render` | belirti kartlarını ve akışın başlık / giriş / not metnini yeniden çizer (veri yoksa bölümü gizler) |
 | `stats.js` | `render` | sayıları yeni dilin biçimiyle yazar (yalnızca sayaç açıksa kayıtlı) |
 | `result.js` | `render` | mesaj  + kapak yazısı (gösterilen testin metinleriyle) |
 | `quiz.js` | `refreshText` | aktif testin soru ve seçenek metinleri, ilerleme, buton etiketi, ipucu |
@@ -129,7 +132,10 @@ theme        toggle   (tema butonunun aria-label ve title'ı)
 refs         title, cite({n})
 home         tagline, start, views, tests
 about        lead, big, p1, p2
-narcolepsy   title, body[]   (paragraf dizisi; "## " ile başlayan satır h3, [@anahtar] alıntı)
+narcolepsy   title, intro[], symptoms, body[], tocLabel
+               intro[]    → kutusuz tanım paragrafları (paragraf dizisi, [@anahtar] alıntı desteklenir, "## " başlık kullanılmaz)
+               symptoms   → { title, [lead], items[], [note] }; items[] = { [image], [alt], [when], title, body } (düz metin, alıntı desteklenmez); items boşsa bölüm gizlenir
+               body[]     → kaydırmalı kutudaki paragraf dizisi ("## " ile başlayan satır h3, [@anahtar] alıntı)
 test         title, switchLabel, progress({n},{total}), prev, next, finish, tip({min},{max})   (testlerin ortak arayüz metinleri)
 tests.<id>   name, subtitle, [intro[]], questions[], scale[], messages,  [copyright]     (her test için bir blok; köşeli olanlar isteğe bağlı)
                messages.<anahtar> → { title, body }; anahtarlar scoring tipine göre:
@@ -144,7 +150,7 @@ footer       role, note, statsNote   (statsNote yalnızca sayaç açıkken göst
 
 HTML'e `data-i18n` ile bağlananlar: `site.name`, `nav.*`, `home.*`, `narcolepsy.title`, `test.title`, `test.switchLabel` (aria-label), `theme.toggle` (aria-label), `test.prev`, `result.hint`, `result.skip`,  `result.edit`, `result.restart`, `share.button`.
 
-JS ile çizilenler: `about.*` (lead, big, p1, p2) ve `narcolepsy.body` (`richtext.js`, `data-i18n-rich*` ile bağlı), `refs.*`, `tests.<id>.*` (soru, seçenek, alt başlık, ad, mesaj), `test.progress`, `test.next`, `test.finish`, `test.tip` (`{min}`/`{max}` içerdiği için `data-i18n` ile bağlanamaz, `quiz.js` yazar), `result.score`, `tests.<id>.intro` ve `tests.<id>.copyright` (`main.js`), `meta.dateLocale`, `footer.*`, `share.text`, `result.cover`, `theme.toggle` (butonun `title`'ı, `theme.js`).
+JS ile çizilenler: `about.*` (lead, big, p1, p2) ve `narcolepsy.intro` / `narcolepsy.body` (`richtext.js`, `data-i18n-rich*` ile bağlı), `narcolepsy.symptoms.*` (`symptoms.js`), `refs.*`, `tests.<id>.*` (soru, seçenek, alt başlık, ad, mesaj), `test.progress`, `test.next`, `test.finish`, `test.tip` (`{min}`/`{max}` içerdiği için `data-i18n` ile bağlanamaz, `quiz.js` yazar), `result.score`, `tests.<id>.intro` ve `tests.<id>.copyright` (`main.js`), `meta.dateLocale`, `footer.*`, `share.text`, `result.cover`, `theme.toggle` (butonun `title`'ı, `theme.js`).
 
 ### Tutarlılık kuralları
 - ESS gibi lisanslı bir testin yönerge (`intro`), madde (`questions`), seçenek (`scale`) ve `copyright` metinleri lisanslı kaynaktan birebir alınır, düzenlenmez. Bant başlıkları yazarın yorum adlarıdır. Bant gövde metinleri (`messages.*.body`)  bize aittir.
@@ -167,7 +173,8 @@ JS'in bağlandığı id ve attribute'lar:
 | `.site-nav a[href="#..."]`, `#about`, `#narcolepsy`, `#test` | |
 | `[data-share-whatsapp]` | `share.js` |
 | `#stats`, `#stat-views`, `#stat-tests` | `stats.js` (`#stats` varsayılan `hidden`) |
-| `[data-rich-block]`, `[data-i18n-rich]`, `[data-i18n-rich-list]`, `[data-refs]` | `richtext.js` |
+| `[data-rich-block]`, `[data-i18n-rich]`, `[data-i18n-rich-list]`, `[data-refs]` | `richtext.js` (Narkolepsi'de iki blok: `narcolepsy-intro` kutusuz `.rich-intro`, `narcolepsy` kaydırmalı `.scroll-box`) |
+| `#symptoms` (`.symptoms-title`, `.symptoms-lead`, `[data-symptom-list]`, `.symptoms-note`) | `symptoms.js` (`#symptoms` varsayılan `hidden`, veri varsa kendi açılır) |
 | `#test-title` | `main.js` (`scrollToTest`) |
 | `#test-switch` | `testswitch.js` (butonlar buraya basılır, varsayılan `hidden`, tek test varsa hep gizli) |
 | `#test-subtitle` | `main.js` (`renderTestMeta`) |
@@ -300,6 +307,16 @@ Cloudflare Worker + D1. Site dosyalarından bağımsız yayınlanır (`worker/RE
 - Rota adları (`/tally`) reklam engelleyici listelerinde sık geçen sözcüklerden bilerek kaçınır. Engellenme olursa kendi alan adına bağlı Worker rotası en sağlam çözümdür.
 - Cloudflare ücretsiz plan limitleri: günde 100.000 Worker isteği, D1'de günde 100.000 satır yazma. Limit aşılırsa istekler hata verir, site bozulmaz (kutu gizlenir).
 
+### `symptoms.js` (belirti akışı)
+Dışa aktarır: `initSymptoms()`. Veri: `narcolepsy.symptoms = { title, [lead], items[], [note] }`, her öğe `{ [image], [alt], [when], title, body }`. Dil dosyasında yer alır, dilden bağımsız ayar yoktur.
+
+- **Yerleşim:** Narkolepsi bölümü üç parçadır: kutusuz tanım (`.rich-intro`, `narcolepsy.intro`), belirti akışı (`#symptoms`), kaydırmalı kutu (`.scroll-box`, `narcolepsy.body`). Tanım ve kutu `richtext.js` ile çizilir, her biri kendi kaynak numaralarını tutar (`narcolepsy-intro` ve `narcolepsy` blokları).
+- **Çizim:** `#symptoms` içindeki `.symptoms-title`, `.symptoms-lead` (isteğe bağlı, yoksa gizlenir), `[data-symptom-list]` (`<ol class="symptom-flow">`, her öğe `li.symptom` > `.symptom-when` + `h4.symptom-title` + `p.symptom-body`) ve `.symptoms-note` (isteğe bağlı) doldurulur. `items` dizi değilse ya da boşsa `#symptoms` gizli kalır.
+- **Görsel alanı:** her kartın üstünde 4:3 bir `.symptom-media` bulunur. `image` (ör. `assets/symptoms/eds.webp`) verilirse `<img>` (`alt` = `alt`, `loading="lazy"`, `width/height` 400×300 sayfa kaymasını önler) çizilir. `image` yoksa ya da dosya yüklenemezse (`error`) kesik çizgili, resim simgeli yer tutucu (`.is-placeholder`, `aria-hidden`) görünür. Oran `symptoms.js > IMG_W/IMG_H` ile `components.css > .symptom-media` içinde aynı tutulur. Görsel yolu ve `alt` dil dosyasında durur (`alt` dile bağlı). Süs görselinde `alt: ""` verilir.
+- **Renk akışı:** her `li` `--p` (0%..100%, sıradaki konumu) alır. CSS `--flow-start` (sabah sarısı) ile `--flow-end` (tema vurgusu) arasını `color-mix` ile karıştırır. İki uç `.symptom-flow` üzerinde tek yerde ayarlanır.
+- **Düzen:** mobilde alt alta dikey çizgi, `64rem` ve üstünde 5 sütun yatay çizgi (`.scroll-box` gibi `.container`'dan taşarak ortalanır). Kart sayısı değişirse masaüstündeki `grid-template-columns: repeat(5, 1fr)` güncellenir.
+- Metin DOM'a `textContent` ile eklenir, `innerHTML` kullanılmaz. Alıntı (`[@anahtar]`) desteklenmez.
+
 ### `richtext.js` + `references.js` (alıntılar)
 Dışa aktarır: `initRichText()`. Veri: `references.js > REFERENCES = { anahtar: { text, url? } }` (dilden bağımsız).
 
@@ -345,6 +362,7 @@ Dışa aktarır: `initRichText()`. Veri: `references.js > REFERENCES = { anahtar
 - İlerleme: `.progress`, `.progress-text`, `.progress-bar`
 - Kayar test: `.viewport` (overflow hidden), `.track` (flex, transform geçişi), `.slide` (`flex: 1`, içinde 4px padding), `.question-text`, `.options`, `.option`, `.opt-key`. Seçili durum `input:checked + label`.
 - `.scroll-box`: `max-height: min(62vh, 30rem)`, `overflow-y: auto`, solda hizalı (sayfanın geri kalanı ortalı). Kaydırma gölgesi `background-attachment: local` ile. Klavye için HTML'de `tabindex="0" role="region"` + isim (`aria-label` / `aria-labelledby`).
+- Narkolepsi tanımı ve belirti akışı: `.rich-intro` (kutusuz, solda hizalı, `46rem`), `.symptoms`, `.symptoms-title`, `.symptoms-lead`, `.symptom-flow` (`--flow-start`, `--flow-end`), `.symptom` (`--p`, `--c`), `.symptom-media` (`.is-placeholder`), `.symptom-when`, `.symptom-title`, `.symptom-body`, `.symptoms-note`. Renkler tema değişkenlerinden (`--surface`, `--border`, `--text`, `--muted`, `--accent-strong`) gelir, tek sabit renk `--flow-start`.
 - Alıntılar: `.cite`, `.refs`, `.refs-title`, `.refs li.flash`.
 - Sonuç: `.scratch-card`, `.scratch-content`, canvas üst katman, `.revealed` ile `opacity: 0`.
 - `prefers-reduced-motion: reduce` altında geçişler kapalı.
@@ -385,4 +403,8 @@ Dışa aktarır: `initRichText()`. Veri: `references.js > REFERENCES = { anahtar
 | Sayacın gösterdiği etiketler | `locales/*.js > home.views`, `home.tests` |
 | Kaynak ekleme | `references.js > REFERENCES`, metinde `[@anahtar]` |
 | Narkolepsi metnine paragraf / başlık ekleme | her `locales/*.js > narcolepsy.body` dizisine eleman (başlık için `## ` ile başla) |
+| Narkolepsi tanım paragrafı (kutusuz giriş) | her `locales/*.js > narcolepsy.intro` dizisi |
+| Belirti ekleme / çıkarma / düzenleme | her `locales/*.js > narcolepsy.symptoms.items` (+ masaüstü sütun sayısı için `components.css > .symptom-flow`, `repeat(5, 1fr)`) |
+| Belirti akışının başlığı, girişi, notu | `locales/*.js > narcolepsy.symptoms.title / lead / note` |
+| Belirti akışının renkleri | `components.css > .symptom-flow` (`--flow-start`, `--flow-end`) |
 | Kutuda kaydırma yüksekliği, hizalama | `components.css > .scroll-box` |

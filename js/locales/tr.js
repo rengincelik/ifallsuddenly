@@ -1,12 +1,12 @@
 // Türkçe
 export default {
   meta: {
-	  title: "Still Tired",
+	  title: "Aniden Düşüyorum",
     description: "Hızlı Ön Tarama",
     dateLocale: "tr-TR",
   },
 
-	site: { name: "Still Tired" },
+	site: { name: "Aniden Düşüyorum" },
 
   nav: {
     aria: "Ana menü",
@@ -26,10 +26,13 @@ export default {
   },
 
 	about: {
-		lead: "Kendimi bildim bileli aşırı yorgun ve uykuluydum. Yer ve zaman fark etmeksizin her an uyuyabiliyordum. Ne zaman doktora gitsem hep aynı yanıtı aldım: 'Tahlillerin temiz, bir sorunun yok.'",
-		big: "Sonunda gerçeği öğrendim: Haklıymışım, ortada gerçekten ciddi bir problem varmış.",
-		p1: "Bu siteyi benimle benzer durumda olan, 'bende bir gariplik var' diyen kişiler için hazırladım. Aşağıda iki tarama testi göreceksiniz. Epworth (ESS) gün içi genel uykululuk düzeyinizi ölçer; İsviçre Narkolepsi Ölçeği (SNS) ise özellikle Tip 1 Narkolepsi belirtilerine odaklanır. Bu testler teşhis koymaz, yalnızca bir uzmana görünmeniz gerekip gerekmediği konusunda fikir verir.",
-		p2: "Uyku, sağlığımızın önemli ama sıkça ihmal edilen bir parçası. Gün içindeki aşırı yorgunluğunuzla ilgili en ufak bir şüpheniz varsa bu testler size bir fikir verebilir. Aşırı uykululuğun birçok farklı nedeni olabilir; sonuçlarınız ne olursa olsun şikâyetleriniz sürüyorsa bir uzmana görünmenizi öneririm. Narkolepsi hakkında daha ayrıntılı bilgiyi sayfanın devamında bulabilirsiniz."
+		lead: "Katapleksi yaşamak ilginç bir deneyim, ama onu tanımlamak daha da ilginç. Tam bu noktada tek bir cümle hayatımı değiştirdi: ani kas kontrolü kaybı.",
+		p1: "Neredeyse kendimi bildim bileli uyku ile ilgili problemlerim vardı. Ama 15 yıldır yaşadığım kas kontrolü kayıplarının uykuyla ilgili olabileceğini asla düşünmemiştim. Geceleri uyumaktan korkar hale gelmiştim. Uyku felci ve halüsinasyonlar yaşıyordum ama ne olduklarını bilmiyordum, anlatacak kelimem de yoktu.",
+		p2: "Sonra bu kelimeyi araştırdım. Bende görülen, ilgili ya da ilgisiz olabilecek diğer semptomları da tek tek listeleyip araştırdım. Kesişim kümesinde karşıma narkolepsi tip 1 çıktı. Başka bir olasılık var mı diye de baktım, ama ani kas kontrolü kaybı bu hastalığa neredeyse özgü bir işaretti. Yaşadıklarımın ne olduğunu ve neden olduğunu öğrendiğimde rahatladım. Adını bilmek, korkunun yarısını alıyormuş.",
+		p3: "Hangi uzmana gitmem gerektiğini ve doktora hangi belirtileri anlatmam gerektiğini araştırdım, gerekli testleri yaptırdım ve teşhisimi aldım. Şimdi tedavi sürecindeyim. Tedavi kararları kişiye özeldir ve doktor kontrolünde alınmalıdır, bu yüzden bu sayfada ilaç ayrıntılarına girmiyorum.",
+		p4: "Araştırırken bu testlere rastladım ve benim sonuçlarımın bu hastalığa sahip bireylerinkiyle paralel olduğunu gördüm. Narkolepsi, birinci basamak sağlık hizmetinde kolay fark edilen bir hastalık değil. Belirtileri gözden kaçabiliyor, genel taramalarda ortaya çıkmıyor ve teşhis için özel testler gerekiyor. Bu noktada basit bir soru testinin bile önemli bir ipucu verebilmesi beni çok etkiledi.",
+		p5: "Ben de belirtilerimi görmezden geliyordum. Haberlerde ya da filmlerde gösterilen uç örneklerden biri değildim ve karşılaştığım hiç kimse 15 yıl boyunca “bu bir hastalık olabilir” demedi. Bu yüzden asıl soru şu: yaşadığın sorun kısa süreli ve geçici mi, yoksa uzun süredir devam eden ve ciddiye alınması gereken bir şey mi? Bu testlerin buna fikir vermesi için bu sayfayı yaptım. Bir teşhis koymuyor, ama doğru kapıyı çalıp çalmaman gerektiğini düşündürebilir.",
+		big: "Ben bunu bir kelimeyle buldum. Bu site, o kelimeyi arayan başka birine daha hızlı ulaşsın diye var.",
 	},
 
   home: {
@@ -42,13 +45,55 @@ export default {
   },
 
   // body: paragraf dizisi. "## " ile başlayan satır başlık olur. [@anahtar] kaynak numarası ekler (js/references.js).
+// js/locales/tr.js içindeki `narcolepsy` bloğuna eklenecek / taşınacak parçalar.
+//
+// 1) Mevcut `narcolepsy.body` dizisinin İLK paragrafını (tanım paragrafı) body'den KES,
+//    aşağıdaki `intro` dizisine taşı. [@anahtar] alıntıları aynen gelir, kaynak listesi
+//    tanım kutusunun altında ayrıca çıkar. Geri kalan paragraflar body'de aynen kalır.
+// 2) `symptoms` bloğunu yapıştır.
 
 	narcolepsy: {
 		title: "Narkolepsi",tocLabel: "Bölümler",
-		body: [
-			"## Genel Bakış",
+
+		intro: [
 			"Narkolepsi, beynin uyku-uyanıklık döngüsünü düzgün düzenleyememesine bağlı, kronik nörolojik bir aşırı uykululuk hastalığıdır.[@scammell2015][@bassetti2021] Genellikle ergenlikte ya da genç yetişkinlikte başlar ve ömür boyu sürer.[@dauvilliers2007]",
 			"Kataplektik narkolepsi dünyada yetişkinlerin yaklaşık %0,02'sini, yani yaklaşık 2.000 kişide 1'ini etkiler.[@dauvilliers2007] Belirtiler çoğu zaman narkolepsi olarak tanınmaz ve çalışmalar tanıya kadar geçen ortalama sürenin 15 yıla kadar çıkabildiğini bildirir.[@thorpy2014]",
+		],
+
+		symptoms: {
+			title: "Narkolepsinin 5 temel belirtisi",
+			lead: "Narkolepside belirtiler genellikle beş başlıkta toplanır. Hepsi her kişide görülmez ve ortaya çıkış sırası değişebilir. Aşağıdaki akış, belirtilerin günün hangi anında kendini gösterebildiğini özetler.",
+			items: [
+				{
+					when: "Gün boyu",
+					title: "Aşırı gündüz uykululuğu",
+					body: "Yeterince uyunmuş olsa bile gün içinde bastıran uyku hali. Konuşurken, yemek yerken ya da çalışırken karşı konulması zor, kısa uyku atakları yaşanabilir. Kısa bir şekerleme çoğu zaman bir süre ferahlatır.",
+				},
+				{
+					when: "Duygu anında",
+					title: "Katapleksi",
+					body: "Kahkaha, şaşkınlık ya da heyecan gibi duygularla birdenbire kas gücünün kaybı. Çene düşebilir, dizler boşalabilir. Kişi bu sırada bilinçlidir; genellikle saniyelerden birkaç dakikaya kadar sürer. Her narkolepsi türünde görülmez.",
+				},
+				{
+					when: "Uyku geçişlerinde",
+					title: "Halüsinasyonlar",
+					body: "Uykuya geçiş sırasında gerçek gibi görünen görüntüler, sesler ya da odada biri varmış hissi. Çoğu zaman gerçek olmadıkları sonradan fark edilir, ama o an korkutucu olabilir.",
+				},
+				{
+					when: "Uyku geçişlerinde",
+					title: "Uyku felci",
+					body: "Zihin uyanıkken bedeni hareket ettirememe hali. Kişi bilinçlidir ama kıpırdayamaz ve konuşamaz. Genellikle saniyelerden birkaç dakikaya kadar sürer ve kendiliğinden geçer.",
+				},
+				{
+					when: "Gece",
+					title: "Bölünmüş gece uykusu",
+					body: "Gece boyunca sık uyanmalar ve hafif, kesintili uyku. Gündüz bu kadar uykulu olunmasına rağmen gece uykusunun bölünmesi, narkolepsinin tipik özelliklerinden biridir.",
+				},
+			],
+			note: "Bu belirtilerden birinin görülmesi narkolepsi olduğu anlamına gelmez; uyku felci ve halüsinasyonlar narkolepsisi olmayan kişilerde de zaman zaman olabilir. Bu sitedeki testler tanı koymaz. Belirtiler günlük yaşamı etkiliyorsa bir uyku uzmanına başvurmak gerekir.",
+		},
+
+		body: [
 
 			"## Nedeni",
 			"Tip 1 narkolepsinin ayırt edici özelliği, hipotalamusun lateral bölgesindeki oreksin (hipokretin) üreten sinir hücrelerinin kaybıdır.[@nishino2000][@thannickal2000] En olası açıklama otoimmün bir süreçtir.[@dauvilliers2007][@bassetti2021]",
