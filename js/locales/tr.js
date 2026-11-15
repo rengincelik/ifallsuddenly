@@ -1,12 +1,12 @@
 // Türkçe
 export default {
   meta: {
-	  title: "Aniden Düşüyorum",
+	  title: "I Fall Suddenly",
     description: "Hızlı Ön Tarama",
     dateLocale: "tr-TR",
   },
 
-	site: { name: "Aniden Düşüyorum" },
+	site: { name: "I Fall Suddenly" },
 
   nav: {
     aria: "Ana menü",
@@ -26,13 +26,16 @@ export default {
   },
 
 	about: {
-		lead: "Katapleksi yaşamak ilginç bir deneyim, ama onu tanımlamak daha da ilginç. Tam bu noktada tek bir cümle hayatımı değiştirdi: ani kas kontrolü kaybı.",
-		p1: "Neredeyse kendimi bildim bileli uyku ile ilgili problemlerim vardı. Ama 15 yıldır yaşadığım kas kontrolü kayıplarının uykuyla ilgili olabileceğini asla düşünmemiştim. Geceleri uyumaktan korkar hale gelmiştim. Uyku felci ve halüsinasyonlar yaşıyordum ama ne olduklarını bilmiyordum, anlatacak kelimem de yoktu.",
-		p2: "Sonra bu kelimeyi araştırdım. Bende görülen, ilgili ya da ilgisiz olabilecek diğer semptomları da tek tek listeleyip araştırdım. Kesişim kümesinde karşıma narkolepsi tip 1 çıktı. Başka bir olasılık var mı diye de baktım, ama ani kas kontrolü kaybı bu hastalığa neredeyse özgü bir işaretti. Yaşadıklarımın ne olduğunu ve neden olduğunu öğrendiğimde rahatladım. Adını bilmek, korkunun yarısını alıyormuş.",
-		p3: "Hangi uzmana gitmem gerektiğini ve doktora hangi belirtileri anlatmam gerektiğini araştırdım, gerekli testleri yaptırdım ve teşhisimi aldım. Şimdi tedavi sürecindeyim. Tedavi kararları kişiye özeldir ve doktor kontrolünde alınmalıdır, bu yüzden bu sayfada ilaç ayrıntılarına girmiyorum.",
-		p4: "Araştırırken bu testlere rastladım ve benim sonuçlarımın bu hastalığa sahip bireylerinkiyle paralel olduğunu gördüm. Narkolepsi, birinci basamak sağlık hizmetinde kolay fark edilen bir hastalık değil. Belirtileri gözden kaçabiliyor, genel taramalarda ortaya çıkmıyor ve teşhis için özel testler gerekiyor. Bu noktada basit bir soru testinin bile önemli bir ipucu verebilmesi beni çok etkiledi.",
-		p5: "Ben de belirtilerimi görmezden geliyordum. Haberlerde ya da filmlerde gösterilen uç örneklerden biri değildim ve karşılaştığım hiç kimse 15 yıl boyunca “bu bir hastalık olabilir” demedi. Bu yüzden asıl soru şu: yaşadığın sorun kısa süreli ve geçici mi, yoksa uzun süredir devam eden ve ciddiye alınması gereken bir şey mi? Bu testlerin buna fikir vermesi için bu sayfayı yaptım. Bir teşhis koymuyor, ama doğru kapıyı çalıp çalmaman gerektiğini düşündürebilir.",
-		big: "Ben bunu bir kelimeyle buldum. Bu site, o kelimeyi arayan başka birine daha hızlı ulaşsın diye var.",
+		// Hikaye: lead + big tek cümle gibi okunur (big vurgulu cümle). p1–p7 sırayla paragraf.
+		lead: "Katapleksi yaşamak ilginç bir deneyim, ama onu tanımlamak daha da ilginç. Tam bu noktada tek bir cümle hayatımı değiştirdi:",
+		big: "Ani kas kontrolü kaybı.",
+		p1: "Neredeyse kendimi bildim bileli uyku ile ilgili problemlerim vardı. Gün içindeki o dayanılmaz EDS (Aşırı Gündüz Uykululuğu / Excessive Daytime Sleepiness) hallerini sadece yorgunluğa yoruyordum. Geceleri uyumaktan korkar hale gelmiştim; çünkü uzandığım an üstüme çöken, halk arasında karabasan olarak bilinen uyku felci (sleep paralysis) ve gerçeklikle rüya arasında gidip gelen o korkutucu hipnagojik halüsinasyonlar yakamı bırakmıyordu. Ne olduklarını bilmiyordum, anlatacak kelimem de yoktu.",
+		p2: "Sonra bu kelimeleri ve yaşadığım ani kas güçsüzlüğü ataklarını, yani katapleksiyi araştırmaya başladım. Bende görülen, ilgili ya da ilgisiz olabilecek diğer semptomları da tek tek listeleyip araştırdım. Kesişim kümesinde karşıma Tip 1 narkolepsi çıktı. Başka bir olasılık var mı diye de baktım, ama özellikle katapleksi ile birleşen bu tablo bu hastalığa neredeyse özgü bir işaretti. Yaşadıklarımın ne olduğunu ve neden olduğunu öğrendiğimde rahatladım. Adını bilmek, korkunun yarısını alıyormuş.",
+		p3: "Hangi uzmana gitmem gerektiğini ve doktora hangi belirtileri anlatmam gerektiğini araştırdım, gerekli testleri (tüm gece polisomnografisi ve ertesi gün yapılan MSLT gibi uyku testlerini) yaptırdım ve teşhisimi aldım. Şimdi tedavi sürecindeyim. Tedavi kararları kişiye özeldir ve doktor kontrolünde alınmalıdır, bu yüzden bu sayfada ilaç ayrıntılarına girmiyorum.",
+		p4: "Araştırırken bu soru testlerine rastladım ve benim sonuçlarımın bu hastalığa sahip bireylerinkiyle paralel olduğunu gördüm. Narkolepsi, birinci basamak sağlık hizmetinde kolay fark edilen bir hastalık değil. Belirtileri gözden kaçabiliyor, genel taramalarda ortaya çıkmıyor ve teşhis için özel testler gerekiyor. Bu noktada basit bir soru testinin bile önemli bir ipucu verebilmesi beni çok etkiledi.",
+		p5: "Ben de belirtilerimi görmezden geliyordum. Haberlerde ya da filmlerde gösterilen uç örneklerden biri değildim ve karşılaştığım hiç kimse 15 yıl boyunca 'bu bir hastalık olabilir' demedi. Bu yüzden asıl soru şu: Yaşadığın sorun kısa süreli ve geçici mi, yoksa uzun süredir devam eden ve ciddiye alınması gereken bir şey mi? Bu testlerin buna fikir vermesi için bu sayfayı yaptım. Bir teşhis koymuyor, ama doğru kapıyı çalıp çalmaman gerektiğini düşündürebilir.",
+		p6: "Aşağıda iki tarama testi göreceksiniz. Epworth (ESS) gün içi genel uykululuk düzeyinizi ölçer; İsviçre Narkolepsi Ölçeği (SNS) ise özellikle Tip 1 narkolepsi belirtilerine odaklanır. Narkolepsi hakkında daha ayrıntılı bilgiyi sayfanın devamında bulabilirsiniz.",
+		p7: "Ben bunu bir kelimeyle buldum. Bu site, o kelimeyi arayan başka birine daha hızlı ulaşsın diye var."
 	},
 
   home: {
@@ -67,27 +70,27 @@ export default {
 				{
 					when: "Gün boyu",
 					title: "Aşırı gündüz uykululuğu",
-					body: "Yeterince uyunmuş olsa bile gün içinde bastıran uyku hali. Konuşurken, yemek yerken ya da çalışırken karşı konulması zor, kısa uyku atakları yaşanabilir. Kısa bir şekerleme çoğu zaman bir süre ferahlatır.",
+					body: "Yeterince uyunsa bile gün boyu süren uyku hali ve karşı konulması zor ani uyku atakları.",
 				},
 				{
 					when: "Duygu anında",
 					title: "Katapleksi",
-					body: "Kahkaha, şaşkınlık ya da heyecan gibi duygularla birdenbire kas gücünün kaybı. Çene düşebilir, dizler boşalabilir. Kişi bu sırada bilinçlidir; genellikle saniyelerden birkaç dakikaya kadar sürer. Her narkolepsi türünde görülmez.",
+					body: "Kahkaha gibi duygularla ani kas gücü kaybı. Kişi bu sırada bilinçlidir.",
 				},
 				{
 					when: "Uyku geçişlerinde",
 					title: "Halüsinasyonlar",
-					body: "Uykuya geçiş sırasında gerçek gibi görünen görüntüler, sesler ya da odada biri varmış hissi. Çoğu zaman gerçek olmadıkları sonradan fark edilir, ama o an korkutucu olabilir.",
+					body: "Uykuya dalarken ya da uyanırken görülen canlı, çoğu zaman korkutucu görüntü ve sesler.",
 				},
 				{
 					when: "Uyku geçişlerinde",
 					title: "Uyku felci",
-					body: "Zihin uyanıkken bedeni hareket ettirememe hali. Kişi bilinçlidir ama kıpırdayamaz ve konuşamaz. Genellikle saniyelerden birkaç dakikaya kadar sürer ve kendiliğinden geçer.",
+					body: "Zihin uyanıkken kısa süreliğine hareket edememe ve konuşamama.",
 				},
 				{
 					when: "Gece",
 					title: "Bölünmüş gece uykusu",
-					body: "Gece boyunca sık uyanmalar ve hafif, kesintili uyku. Gündüz bu kadar uykulu olunmasına rağmen gece uykusunun bölünmesi, narkolepsinin tipik özelliklerinden biridir.",
+					body: "Gece boyunca sık uyanmalar ve hafif, kesintili uyku.",
 				},
 			],
 			note: "Bu belirtilerden birinin görülmesi narkolepsi olduğu anlamına gelmez; uyku felci ve halüsinasyonlar narkolepsisi olmayan kişilerde de zaman zaman olabilir. Bu sitedeki testler tanı koymaz. Belirtiler günlük yaşamı etkiliyorsa bir uyku uzmanına başvurmak gerekir.",
@@ -97,21 +100,22 @@ export default {
 
 			"## Nedeni",
 			"Tip 1 narkolepsinin ayırt edici özelliği, hipotalamusun lateral bölgesindeki oreksin (hipokretin) üreten sinir hücrelerinin kaybıdır.[@nishino2000][@thannickal2000] En olası açıklama otoimmün bir süreçtir.[@dauvilliers2007][@bassetti2021]",
-			"Genetik yatkınlık: kataplektik narkolepsisi olanların neredeyse tamamı HLA-DQB1*06:02 aleline sahiptir.[@mignot2001]",
-			"Çevresel tetikleyiciler: şimdiye kadar saptanan en güçlü çevresel risk, hem enfeksiyon hem aşı yoluyla influenza A (H1N1)'dir.[@bonvalet2017]",
+			"Genetik yatkınlık: kataplektik narkolepsisi olanlarda HLA-DQB1*06:02 aleli çok sık görülür.[@mignot2001] Bir çalışmada tipik kataplekside bu oran %93, kontrol grubunda %17 bulundu.[@mignot2002] Yani alel riskle ilişkilidir ama tek başına hastalık anlamına gelmez.",
+			"Çevresel tetikleyiciler: şimdiye kadar saptanan en güçlü çevresel risk influenza A (H1N1) enfeksiyonudur.[@bonvalet2017] Çin'de yapılan bir çalışmada narkolepsi başlangıcı en sık nisanda, en seyrek kasımda görüldü. 2009-2010 H1N1 salgınından sonra başlangıçlar yaklaşık üç kat arttı ve grip tepesi ile başlangıç tepesi arasında 5-7 ay fark vardı.[@han2011] Bu bulgular bir ilişkiyi gösterir, kesin nedensellik kanıtı değildir.[@han2011]",
 
 			"## Beş belirti",
-			"Narkolepsi, gece uykusunun bölünmesini de içeren beş belirtiyle (pentad) tanımlanır.[@dauvilliers2007]",
+			"Narkolepsi, gece uykusunun bölünmesini de içeren beş belirtiyle (pentad) tanımlanır. Hepsi her kişide görülmez ve ortaya çıkış sırası değişebilir.[@dauvilliers2007]",
 			"1. Aşırı gündüz uykululuğu. Her hastada vardır: sürekli uykulu olma ve gün boyunca karşı konulamaz uyku atakları.[@scammell2015]",
-			"2. Katapleksi. Kahkaha, heyecan ya da öfke gibi güçlü duyguların tetiklediği, bilinç açıkken ani ve kısa süreli kas gücü kaybı.[@sturzenegger2004]",
-			"3. Uyku felci. Uykuya dalarken ya da uyanırken geçici olarak hareket edememe veya konuşamama.[@dauvilliers2007]",
-			"4. Hipnagojik / hipnopompik halüsinasyonlar. Uykuya dalarken ya da uyanırken yaşanan canlı, çoğu zaman korkutucu algılar.[@dauvilliers2007]",
-			"5. Bölünen gece uykusu. Gündüz uykulu olunmasına rağmen gece sık hareket etme ve sık uyanma.[@dauvilliers2007]",
+			"2. Katapleksi. Kahkaha, heyecan ya da öfke gibi güçlü duyguların tetiklediği, bilinç açıkken ani ve kısa süreli kas gücü kaybı.[@sturzenegger2004] Katapleksi Tip 1'in tanı ölçütlerinden biridir, Tip 2'de görülmez.[@aasm2014]",
+			"3. Uyku felci. Uykuya dalarken ya da uyanırken geçici olarak hareket edememe veya konuşamama.[@dauvilliers2007] Bu, REM uykusundaki kas gevşekliğinin bilinç açıkken sürmesidir; çoğu zaman korkutucudur ve canlı, rüya benzeri halüsinasyonlar eşlik edebilir.[@sharpless2016] Narkolepsisi olmayanlarda da görülür: 35 çalışmayı birleştiren bir derlemede genel nüfusun %7,6'sı hayatında en az bir atak yaşamış, öğrencilerde bu oran yaklaşık %28 olmuştur.[@sharpless2011] Yetersiz ve bölünmüş uyku riski artıran etkenler arasındadır.[@sharpless2016]",
+			"4. Hipnagojik / hipnopompik halüsinasyonlar. Uykuya dalarken ya da uyanırken yaşanan canlı, çoğu zaman korkutucu algılar.[@dauvilliers2007] Narkolepside sık görülürler ama tek başına narkolepsi anlamına gelmezler: İngiltere'de 4972 kişiyle yapılan görüşmede katılımcıların %37'si uykuya dalarken, %12,5'i uyanırken halüsinasyon bildirmiştir. Uykusuzluk ya da aşırı gündüz uykululuğu olanlarda daha sık görülmüşlerdir.[@ohayon1996]",
+			"5. Bölünen gece uykusu. Gündüz uykulu olunmasına rağmen gece sık hareket etme ve sık uyanma.[@dauvilliers2007] Narkolepside sık bir şikâyet ve gece uykusu kayıtlarında sık rastlanan bir bulgudur; sık, kısa uyanmalar ve tekrar uykuya dönmekte zorluk olarak tarif edilir.[@roth2013] Bir derlemeye göre tedavi almayan hastaların yaklaşık %61'i, tedavi alanların yaklaşık %40'ı gece uykusunda bozulma bildirmiştir.[@maski2022] Uzman görüşü, bunun da tedavi hedefi olabileceği yönündedir.[@roth2013]",
 
 			"## Türleri",
 			"Uluslararası Uyku Bozuklukları Sınıflaması (3. baskı) iki tür ayırır.[@aasm2014][@sateia2014]",
 			"Tip 1 (NT1): katapleksi vardır ya da beyin-omurilik sıvısında (BOS) hipokretin-1 düzeyi düşüktür (110 pg/mL veya altı).",
 			"Tip 2 (NT2): katapleksi yoktur, BOS hipokretin-1 düzeyi normaldir ya da ölçülmemiştir.",
+			"Tip 2'de HLA-DQB1*06:02 aleli daha seyrek bulunur: bir çalışmada kataplekisiz narkolepside %56, tipik kataplekide %93.[@mignot2002]",
 
 			"## Tanı nasıl konur",
 			"Kesin tanı, kapsamlı bir klinik ve laboratuvar değerlendirmesi gerektirir.[@aasm2014]",
@@ -119,11 +123,14 @@ export default {
 			"Çoklu Uyku Latansı Testi (MSLT), uykuya ne kadar hızlı daldığınızı (ortalama 8 dakika veya daha kısa) ve uykuya dalıştan hemen sonra REM uykusunun başlayıp başlamadığını (iki veya daha fazla uyku başlangıcı REM dönemi) ölçer.[@aasm2014][@littner2005]",
 			"Bu sitedeki test olan İsviçre Narkolepsi Ölçeği (SNS), Tip 1 narkolepsi için kullanılan, beş soruluk kısa bir tarama aracıdır ve soruları uykuya dalamamayı, sabahları dinlenmemiş uyanmayı, gündüz şekerlemesini ve katapleksinin iki belirtisini (diz çözülmesi ve çene düşmesi) sorar. Farklı toplumlarda yapılan çalışmalar, Tip 1 narkolepsiyi diğer uykululuk nedenlerinden yüksek duyarlılık ve özgüllükle ayırdığını göstermiştir.[@sturzenegger2004][@sturzenegger2018][@bargiotas2019] Ölçeğin Türkçe sürümünün geçerlik ve güvenirliği gösterilmiştir.[@demir2023] Tip 2'yi saptayamaz ve bir tarama aracı tanının yerini tutmaz.[@bargiotas2019]",
 			"BOS hipokretin-1 ölçümü, Tip 1 narkolepsi için altın standart biyobelirteçtir.[@nishino2000]",
+			"Bir çalışmada 110 pg/mL altındaki hipokretin-1 düzeyi narkolepsi için tanısal bulunmuş, 200 pg/mL üzeri normal sayılmıştır. Ölçüm en çok katapleksili hastalarda ve MSLT'nin yorumlanmasının güç olduğu durumlarda, örneğin psikoaktif ilaç kullananlarda işe yarar.[@mignot2002]",
 
 			"## Tedavi",
 			"Tedavi, ilaçları davranışsal önlemlerle birleştirir ve genellikle ömür boyu sürdürülmesi gerekir.[@bassetti2021]",
-			"Planlı gündüz şekerlemeleri ve çeşitli ilaçlar uykululuğu azaltır, başka ilaçlar da katapleksiyi azaltır. Seçim kişinin belirtilerine bağlıdır ve bir uzman tarafından yapılır.[@bassetti2021]",
-			"Oreksin reseptör agonistleri, doğrudan hipokretin eksikliğini hedefleyen yeni bir yaklaşımdır. Ağustos 2026'da FDA, oral bir oreksin reseptör-2 (OX2R) agonisti olan oveporexton'u (Orzeyful) yetişkinlerde Tip 1 narkolepsi için onayladı. Oreksin sinyalinin kaybını doğrudan hedefleyen ilk ilaçtır.[@fda2026]",
+			"Çeşitli ilaçlar uykululuğu, başka ilaçlar katapleksiyi azaltır. Seçim kişinin belirtilerine bağlıdır ve bir uzman tarafından yapılır.[@bassetti2021]",
+			"Amerikan Uyku Tıbbı Akademisi'nin 2021 kılavuzu, yetişkin narkolepsisinde birkaç ilaç için güçlü öneri verir. Kılavuzu hazırlayanlara göre ilaç tek başına yeterli tedavi olmamalıdır; uyku hijyeni, okul ya da iş uyarlamaları ve bilişsel davranışçı terapi de plana girmelidir.[@maski2021]",
+			"Planlı şekerlemeler her hastaya önerilmez. Randomize bir çalışmada iki kısa şekerleme eklemek belirtileri ortalama olarak değiştirmedi; yalnızca uyarıcı ilaçlara rağmen çok uykulu kalan hastalar planlı uykudan yarar gördü. Gece uykusu saatlerini düzenlemek ise algılanan belirti şiddetini azalttı.[@rogers2001] İlaç kullanan hastalarda birden fazla kısa şekerlemenin aşırı gündüz uykululuğunu yönetmede etkili olduğu da bildirilmiştir.[@takahashi2003]",
+			"Oreksin reseptör agonistleri, doğrudan hipokretin eksikliğini hedefleyen yeni bir yaklaşımdır. Ağustos 2026'da FDA, oral bir oreksin reseptör-2 (OX2R) agonisti olan oveporexton'u (Orzeyful) yetişkinlerde Tip 1 narkolepsi için onayladı. Oreksin sinyalinin kaybını doğrudan hedefleyen ilk ilaçtır.[@fda2026] Faz 2 çalışmada Tip 1 narkolepsili 112 yetişkin sekiz hafta boyunca ilaç ya da plasebo aldı; uyanıklık, gündüz uykululuğu ve katapleksi plaseboya göre belirgin düzeldi. En sık yan etkiler uykusuzluk (%48) ile idrar sıklığı ve sıkışmasıydı.[@dauvilliers2025]",
 
 			"## Sonra ne yapmalı",
 			"Bu belirtiler size tanıdık geliyorsa bir nöroloji ya da uyku tıbbı uzmanına başvurun. Uykululuğunuzun, kas güçsüzlüğünüzün ve uyku sorunlarınızın ne zaman olduğunu ve kullandığınız ilaçları not edip yanınızda götürün.",

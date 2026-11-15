@@ -25,4 +25,4 @@ playwright-report/
 *.tmp
 
 .wrangler/
-.dev.vars.
+.dev.vars

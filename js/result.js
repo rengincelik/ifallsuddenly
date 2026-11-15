@@ -60,7 +60,6 @@ export function createResult({
 	function render() {
 		if (!answers) return;
 		renderMessage();
-		renderSummary();
 		scratch.relabel();
 	}
 
