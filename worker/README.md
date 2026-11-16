@@ -40,7 +40,7 @@ npx wrangler d1 create narkolepsi-tally
 https://rengincelik.github.io
 ```
 
-(`/NT_1/` kısmı yazılmaz.) Birden fazla adres virgülle ayrılır. Yerel geliştirme adresleri (`http://localhost:8000`, `http://127.0.0.1:8000`) zaten varsayılan olarak durabilir.
+(`/NT_1/` kısmı yazılmaz.) Birden fazla adres virgülle ayrılır. Yerel geliştirme adresleri ( `http://127.0.0.1:8000`) zaten varsayılan olarak durabilir.
 
 6. **Tabloyu oluştur ve yayınla**:
 

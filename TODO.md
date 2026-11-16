@@ -27,7 +27,7 @@ Durumlar GitHub `main` koduna göre işaretlidir. Dosya yolları ve anahtar adla
 
 
 - [ ] **Worker D1 şemasını güncel modele hizala** (`worker/schema.sql`). Şema hâlâ eski `tests` toplam satırını ekliyor; Worker toplamı `test_<id>` satırlarından hesaplıyor. Eski satırı kaldır veya neden tutulduğunu belgele.
-- [ ] **Worker README yerel origin örneklerini düzelt** (`worker/README.md`, `worker/wrangler.toml`). README `http://localhost:8000`'in varsayılan izinli olduğunu söylüyor, `ALLOWED_ORIGINS`'te yok. Listeye ekle ya da README'yi gerçek ayarla eşleştir.
+
 - [ ] **Skorlama testlerini gerçek config'e bağla** (`js/scoring.test.js`). SNS/ESS konfigürasyonları test dosyasında elle kopyalanmış; `config.js > TESTS` doğrudan import edilsin. Sınır değerleri (eşiğin tam üstü/altı, tüm 0, tüm maksimum, `bands` sınırları ve en düşük bandın altı) kapsanıyor mu kontrol et.
 - [ ] **SNS/ESS konfigürasyon tutarlılık testi ekle.** `questionCount`, `scaleSize`, `weights.length`, her dilde soru/seçenek uzunlukları ve sonuç mesajı anahtarları kontrol edilsin.
 - [ ] **Tarayıcı otomasyon testleri (Playwright veya eşdeğeri, CI'da):**
