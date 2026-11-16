@@ -69,26 +69,31 @@ export default {
 			lead: "Narkolepside belirtiler genellikle beş başlıkta toplanır. Hepsi her kişide görülmez ve ortaya çıkış sırası değişebilir. Aşağıdaki akış, belirtilerin günün hangi anında kendini gösterebildiğini özetler.",
 			items: [
 				{
+					image: "assets/symptoms/eds.svg",
 					when: "Gün boyu",
 					title: "Aşırı gündüz uykululuğu",
 					body: "Yeterince uyunsa bile gün boyu süren uyku hali ve karşı konulması zor ani uyku atakları.",
 				},
 				{
+					image: "assets/symptoms/cataplexy.svg",
 					when: "Duygu anında",
 					title: "Katapleksi",
 					body: "Kahkaha gibi duygularla ani kas gücü kaybı. Kişi bu sırada bilinçlidir.",
 				},
 				{
+					image: "assets/symptoms/hallucinations.svg",
 					when: "Uyku geçişlerinde",
 					title: "Halüsinasyonlar",
 					body: "Uykuya dalarken ya da uyanırken görülen canlı, çoğu zaman korkutucu görüntü ve sesler.",
 				},
 				{
+					image: "assets/symptoms/sleep-paralysis.svg",
 					when: "Uyku geçişlerinde",
 					title: "Uyku felci",
 					body: "Zihin uyanıkken kısa süreliğine hareket edememe ve konuşamama.",
 				},
 				{
+					image: "assets/symptoms/dns.svg",
 					when: "Gece",
 					title: "Bölünmüş gece uykusu",
 					body: "Gece boyunca sık uyanmalar ve hafif, kesintili uyku.",
@@ -98,12 +103,6 @@ export default {
 		},
 
 		body: [
-
-			"## Nedeni",
-			"Tip 1 narkolepsinin ayırt edici özelliği, hipotalamusun lateral bölgesindeki oreksin (hipokretin) üreten sinir hücrelerinin kaybıdır.[@nishino2000][@thannickal2000] En olası açıklama otoimmün bir süreçtir.[@dauvilliers2007][@bassetti2021]",
-			"Genetik yatkınlık: kataplektik narkolepsisi olanlarda HLA-DQB1*06:02 aleli çok sık görülür.[@mignot2001] Bir çalışmada tipik kataplekside bu oran %93, kontrol grubunda %17 bulundu.[@mignot2002] Yani alel riskle ilişkilidir ama tek başına hastalık anlamına gelmez.",
-			"Çevresel tetikleyiciler: şimdiye kadar saptanan en güçlü çevresel risk influenza A (H1N1) enfeksiyonudur.[@bonvalet2017] Çin'de yapılan bir çalışmada narkolepsi başlangıcı en sık nisanda, en seyrek kasımda görüldü. 2009-2010 H1N1 salgınından sonra başlangıçlar yaklaşık üç kat arttı ve grip tepesi ile başlangıç tepesi arasında 5-7 ay fark vardı.[@han2011] Bu bulgular bir ilişkiyi gösterir, kesin nedensellik kanıtı değildir.[@han2011]",
-
 			"## Beş belirti",
 			"Narkolepsi, gece uykusunun bölünmesini de içeren beş belirtiyle (pentad) tanımlanır. Hepsi her kişide görülmez ve ortaya çıkış sırası değişebilir.[@dauvilliers2007]",
 			"1. Aşırı gündüz uykululuğu. Her hastada vardır: sürekli uykulu olma ve gün boyunca karşı konulamaz uyku atakları.[@scammell2015]",
@@ -111,6 +110,11 @@ export default {
 			"3. Uyku felci. Uykuya dalarken ya da uyanırken geçici olarak hareket edememe veya konuşamama.[@dauvilliers2007] Bu, REM uykusundaki kas gevşekliğinin bilinç açıkken sürmesidir; çoğu zaman korkutucudur ve canlı, rüya benzeri halüsinasyonlar eşlik edebilir.[@sharpless2016] Narkolepsisi olmayanlarda da görülür: 35 çalışmayı birleştiren bir derlemede genel nüfusun %7,6'sı hayatında en az bir atak yaşamış, öğrencilerde bu oran yaklaşık %28 olmuştur.[@sharpless2011] Yetersiz ve bölünmüş uyku riski artıran etkenler arasındadır.[@sharpless2016]",
 			"4. Hipnagojik / hipnopompik halüsinasyonlar. Uykuya dalarken ya da uyanırken yaşanan canlı, çoğu zaman korkutucu algılar.[@dauvilliers2007] Narkolepside sık görülürler ama tek başına narkolepsi anlamına gelmezler: İngiltere'de 4972 kişiyle yapılan görüşmede katılımcıların %37'si uykuya dalarken, %12,5'i uyanırken halüsinasyon bildirmiştir. Uykusuzluk ya da aşırı gündüz uykululuğu olanlarda daha sık görülmüşlerdir.[@ohayon1996]",
 			"5. Bölünen gece uykusu. Gündüz uykulu olunmasına rağmen gece sık hareket etme ve sık uyanma.[@dauvilliers2007] Narkolepside sık bir şikâyet ve gece uykusu kayıtlarında sık rastlanan bir bulgudur; sık, kısa uyanmalar ve tekrar uykuya dönmekte zorluk olarak tarif edilir.[@roth2013] Bir derlemeye göre tedavi almayan hastaların yaklaşık %61'i, tedavi alanların yaklaşık %40'ı gece uykusunda bozulma bildirmiştir.[@maski2022] Uzman görüşü, bunun da tedavi hedefi olabileceği yönündedir.[@roth2013]",
+
+			"## Nedeni",
+			"Tip 1 narkolepsinin ayırt edici özelliği, hipotalamusun lateral bölgesindeki oreksin (hipokretin) üreten sinir hücrelerinin kaybıdır.[@nishino2000][@thannickal2000] En olası açıklama otoimmün bir süreçtir.[@dauvilliers2007][@bassetti2021]",
+			"Genetik yatkınlık: kataplektik narkolepsisi olanlarda HLA-DQB1*06:02 aleli çok sık görülür.[@mignot2001] Bir çalışmada tipik kataplekside bu oran %93, kontrol grubunda %17 bulundu.[@mignot2002] Yani alel riskle ilişkilidir ama tek başına hastalık anlamına gelmez.",
+			"Çevresel tetikleyiciler: şimdiye kadar saptanan en güçlü çevresel risk influenza A (H1N1) enfeksiyonudur.[@bonvalet2017] Çin'de yapılan bir çalışmada narkolepsi başlangıcı en sık nisanda, en seyrek kasımda görüldü. 2009-2010 H1N1 salgınından sonra başlangıçlar yaklaşık üç kat arttı ve grip tepesi ile başlangıç tepesi arasında 5-7 ay fark vardı.[@han2011] Bu bulgular bir ilişkiyi gösterir, kesin nedensellik kanıtı değildir.[@han2011]",
 
 			"## Türleri",
 			"Uluslararası Uyku Bozuklukları Sınıflaması (3. baskı) iki tür ayırır.[@aasm2014][@sateia2014]",

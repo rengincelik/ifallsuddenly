@@ -58,26 +58,31 @@ export default {
 			lead: "Symptoms usually fall into five groups. Not everyone has all of them, and the order they appear in can vary. The flow below shows when in the day each one can show up.",
 			items: [
 				{
+					image: "assets/symptoms/eds.svg",
 					when: "All day",
 					title: "Excessive daytime sleepiness",
 					body: "Heavy sleepiness through the day even after enough sleep, with sudden sleep attacks that are hard to resist.",
 				},
 				{
+					image: "assets/symptoms/cataplexy.svg",
 					when: "Strong emotions",
 					title: "Cataplexy",
 					body: "Sudden loss of muscle strength triggered by emotions like laughter, while you stay awake and aware.",
 				},
 				{
+					image: "assets/symptoms/hallucinations.svg",
 					when: "Sleep transitions",
 					title: "Hallucinations",
 					body: "Vivid, often frightening images or sounds as you fall asleep or wake up.",
 				},
 				{
+					image: "assets/symptoms/sleep-paralysis.svg",
 					when: "Sleep transitions",
 					title: "Sleep paralysis",
 					body: "Briefly being unable to move or speak while your mind is awake.",
 				},
 				{
+					image: "assets/symptoms/dns.svg",
 					when: "At night",
 					title: "Disrupted nighttime sleep",
 					body: "Frequent awakenings and light, fragmented sleep during the night.",
@@ -87,11 +92,6 @@ export default {
 		},
     body: [
 
-      "## Cause",
-      "The hallmark of Type 1 narcolepsy is the loss of orexin (hypocretin) neurons in the lateral hypothalamus.[@nishino2000][@thannickal2000] The most likely explanation is an autoimmune process.[@dauvilliers2007][@bassetti2021]",
-      "Genetic susceptibility: the HLA-DQB1*06:02 allele is very common in people with narcolepsy with cataplexy.[@mignot2001] In one study it was found in 93% of people with typical cataplexy and in 17% of controls.[@mignot2002] So the allele is linked to risk, but carrying it does not by itself mean having the disease.",
-      "Environmental triggers: the strongest environmental risk identified so far is influenza A (H1N1) infection.[@bonvalet2017] In a study from China, narcolepsy onset was most frequent in April and least frequent in November. After the 2009-2010 H1N1 pandemic, onsets rose about threefold, and the peak in onsets followed the flu peak by 5 to 7 months.[@han2011] These findings show an association, not proof of cause.[@han2011]",
-
       "## The five symptoms",
       "Narcolepsy is described by a symptom pentad, which includes fragmented night sleep. Not everyone has all five, and the order they appear in can vary.[@dauvilliers2007]",
       "1. Excessive daytime sleepiness. Present in every patient: constant sleepiness and irresistible sleep attacks during the day.[@scammell2015]",
@@ -99,6 +99,11 @@ export default {
       "3. Sleep paralysis. Being temporarily unable to move or speak while falling asleep or waking up.[@dauvilliers2007] It happens when the muscle relaxation of REM sleep carries on into wakefulness; it is often frightening and can come with vivid, dream-like hallucinations.[@sharpless2016] It also occurs in people without narcolepsy: a review pooling 35 studies found that 7.6% of the general population had at least one episode in their lifetime, and about 28% of students.[@sharpless2011] Insufficient and disrupted sleep are among the factors that raise the risk.[@sharpless2016]",
       "4. Hypnagogic / hypnopompic hallucinations. Vivid, often frightening experiences at sleep onset or on waking.[@dauvilliers2007] They are common in narcolepsy but do not by themselves mean narcolepsy: in an interview survey of 4,972 people in the UK, 37% reported hallucinations while falling asleep and 12.5% on waking. They were more common in people with insomnia or excessive daytime sleepiness.[@ohayon1996]",
       "5. Disrupted night sleep. Frequent movement and awakenings during the night, even though you are sleepy during the day.[@dauvilliers2007] It is a common complaint in narcolepsy and a frequent finding on night sleep recordings, described as frequent, brief awakenings with difficulty getting back to sleep.[@roth2013] According to one review, about 61% of untreated patients and about 40% of treated patients report disturbed night sleep.[@maski2022] Expert opinion is that it can be a treatment target too.[@roth2013]",
+
+		"## Cause",
+		"The hallmark of Type 1 narcolepsy is the loss of orexin (hypocretin) neurons in the lateral hypothalamus.[@nishino2000][@thannickal2000] The most likely explanation is an autoimmune process.[@dauvilliers2007][@bassetti2021]",
+		"Genetic susceptibility: the HLA-DQB1*06:02 allele is very common in people with narcolepsy with cataplexy.[@mignot2001] In one study it was found in 93% of people with typical cataplexy and in 17% of controls.[@mignot2002] So the allele is linked to risk, but carrying it does not by itself mean having the disease.",
+		"Environmental triggers: the strongest environmental risk identified so far is influenza A (H1N1) infection.[@bonvalet2017] In a study from China, narcolepsy onset was most frequent in April and least frequent in November. After the 2009-2010 H1N1 pandemic, onsets rose about threefold, and the peak in onsets followed the flu peak by 5 to 7 months.[@han2011] These findings show an association, not proof of cause.[@han2011]",
 
       "## Types",
       "The International Classification of Sleep Disorders (3rd edition) separates two types.[@aasm2014][@sateia2014]",

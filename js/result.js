@@ -7,8 +7,8 @@ import { t, onLangChange } from "./i18n.js";
 import { createScratch } from "./scratch.js";
 
 export function createResult({
-								 panel, content, canvas, hint, skipBtn, actions, summary,
-								 editBtn, restartBtn, printBtn, onEdit, onRestart,
+								 panel, content, canvas, hint, skipBtn, actions,
+								 editBtn, restartBtn, onEdit, onRestart,
 							 }) {
 	const scratch = createScratch({
 		canvas,
