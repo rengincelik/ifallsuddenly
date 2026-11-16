@@ -4,6 +4,10 @@ Bağımlılıksız, derleme adımı olmayan statik site. Vanilla HTML + CSS + ES
 
 Çalıştırma: ES modules ve `main.js` içindeki top-level `await` yüzünden `file://` ile açılmaz. Klasörde yerel sunucu gerekir (`python -m http.server`). GitHub Pages / Netlify'da doğrudan çalışır.
 
+Şu an iki tarama testi var: **SNS** (Swiss Narcolepsy Scale, Tip 1 narkolepsi / katapleksi ön taraması) ve **ESS** (Epworth Sleepiness Scale, genel gündüz uykululuğu). Site tanı aracı değildir; test cevapları sunucuya gönderilmez.
+
+Skorlama birim testleri: `node --test js/scoring.test.js` (Node'un yerleşik `node:test` modülü).
+
 ---
 
 ## 1. Klasör yapısı
@@ -27,16 +31,16 @@ js/
   theme.js          tema (açık/koyu), header tema butonu, seçimi saklama
   testswitch.js     test seçici butonları (tek test varsa gizli)
   site.js           footer render
-  nav.js            scroll ile menü vurgusu
   share.js          WhatsApp linki
   stats.js          sayaç: Worker'a sayım + sayıları okuma, GoatCounter'a arka plan sayımı
   richtext.js       alıntılı metin ([@anahtar]), kaynak listesi
   references.js     kaynak kayıtları (REFERENCES)
   symptoms.js       narkolepsi belirti akışı (narcolepsy.symptoms), belirti başına bir kart
   quiz.js           adım adım test (birden fazla testi taşır)
-  result.js         sonuç paneli, PDF özeti
+  result.js         sonuç paneli (doğrulama, sınıflandırma, mesaj, kazı-kazan bağlantısı)
   scratch.js        kazı-kazan canvas
   scoring.js        skor hesabı (DOM'suz)
+  scoring.test.js   scoring.js birim testleri (`node:test`)
   locales/
     en.js           varsayılan dil, tüm metinler
     tr.js
@@ -45,9 +49,18 @@ worker/             sayaç Worker'ı (siteden ayrı yayınlanır, Cloudflare Wor
   schema.sql        D1 tablosu
   wrangler.toml     Worker ayarı (izinli siteler, D1 bağlantısı)
   README.md         yayınlama adımları
+README.md
+ARCHITECTURE.md
+TODO.md
+.gitignore
 ```
 
-CSS yükleme sırası (`index.html`): `base` → `background` → `layout` → `components` → .
+CSS yükleme sırası (`index.html`): `base` → `layout` → `components`.
+
+Notlar:
+
+- `background.css`, `nav.js`, `package.json` ve Playwright yapılandırması mevcut çalışma akışının parçası değildir.
+- Sonuç ekranında PDF/yazdırma özeti şu an etkin değildir. `result.js` içindeki `summary` parametresi (ve `printBtn`) ile `main.js`'teki ilgili bağlantılar kullanılmayan eski tasarım izleridir.
 
 ---
 
@@ -75,7 +88,7 @@ main.js
 Başlatma sırası (`main.js`):
 
 1. `await initI18n()`
-2. `initLangSwitch()`, `initTheme()`, `initSite()`, `initNav()`, `initShare()`, `initRichText()`, `initSymptoms()`
+2. `initLangSwitch()`, `initTheme()`, `initSite()`, `initShare()`, `initRichText()`, `initSymptoms()`
 3. `initStats()` (beklenmez, sayılar gelince kutu kendi açılır)
 4. `createResult({...})`
 5. `createQuiz({ tests: TESTS, initialTest: DEFAULT_TEST, ... })`; `onFinish(answers, id)` içinde `finished.set`, `trackTestCompleted(id)`, sonra `result.show(answers, id)`
@@ -183,8 +196,8 @@ JS'in bağlandığı id ve attribute'lar:
 | `#quiz-panel`, `#quiz-viewport`, `#quiz-track`, `#prev-btn`, `#next-btn`, `#quiz-tip` | `quiz.js` |
 | `#progress-text`, `#progress-fill`, `#progress-bar` | `quiz.js` |
 | `#result-panel`, `#result-content`, `#scratch`, `#scratch-hint`, `#skip-scratch`, `#result-actions` | `result.js` |
-| `#edit-btn`, `#restart-btn`,  | `result.js` |
-| `#bg` | arka plan katmanı (JS bağlı değil) |
+| `#edit-btn`, `#restart-btn` | `result.js` |
+| `#bg` | yalnızca dekoratif, boş arka plan katmanı; ne JS ne de ayrı bir arka plan CSS'i kullanır |
 
 Header'ın sağ tarafı `.header-tools` içindedir: `#lang-list` + `#theme-btn`. Sarmalayıcı mobil grid düzeninde (`layout.css`, `36rem` altı) bu ikisini tek hücre yapar.
 
@@ -205,7 +218,7 @@ Bölüm id'leri: `home`, `about`, `narcolepsy`, `test`. Menü linkleri bunlara `
 | Bitirilmiş durum | `main.js > finished` (id → cevaplar), yalnızca bellekte |
 | Tamamlanma sayacı | Worker'da `test_<id>`, GoatCounter'da `/test-completed/<id>` |
 
-Cevaplar hiçbir yere gönderilmez ve saklanmaz. Sayfa yenilenince bellekteki her şey sıfırlanır. Cihazda yalnızca dil ve tema tercihi saklanır (`localStorage["lang"]`, `localStorage["theme"]`), ve yalnızca kullanıcı bayrağa ya da tema butonuna tıklayınca.
+Cevaplar hiçbir yere gönderilmez ve saklanmaz. Sayfa yenilenince bellekteki her şey sıfırlanır. Cihazda yalnızca dil ve tema tercihi saklanır (`localStorage["lang"]`, `localStorage["theme"]`), ve yalnızca kullanıcı bayrağa ya da tema butonuna tıklayınca. GitHub Pages alt yolları aynı origin'i paylaşır; bu yüzden `lang` ve `theme` gibi genel localStorage anahtarları aynı origin'deki başka projelerle çakışabilir.
 
 ### `main.js`: seçili test
 - `selectTest(id)`: `quiz.setTest(id)` → `renderTestMeta()` (alt başlık, yönerge, telif) → test daha önce bitirildiyse `result.show(cevaplar, id, { revealed: true })` (kazı-kazan atlanır), bitirilmediyse quiz paneli.
@@ -232,11 +245,12 @@ Döndürür: `{ setTest(id), goTo(n), reset(), lastIndex (getter), testId (gette
 - `reset()` aktif testin cevaplarını ve seçimlerini temizler, 0. soruya döner.
 
 ### `result.js`: `createResult({...})`
-Parametreler: `panel, content, canvas, hint, skipBtn, actions, summary, editBtn, restartBtn, onEdit, onRestart`.
+Parametreler: `panel, content, canvas, hint, skipBtn, actions, summary, editBtn, restartBtn, onEdit, onRestart` (`summary` kullanılmıyor, PDF/yazdırma özeti etkin değil).
 Döndürür: `{ show(answers, testId, { revealed }), hide() }`.
 
 `show(answers, testId, opts)`:
-1. `TESTS[testId].scoring` ile `classify(computeScore(answers, scoring), scoring)` → mesaj anahtarı → `tests.<id>.messages.<anahtar>` → `#result-content`. `showScore` ise başlıkla gövde arasına `result.score` satırı (`.result-score`) eklenir.
+1. `TESTS[testId].scoring` ile `isValid(answers, scoring, scaleSize)` çağrılır; geçersizse panel açılmaz, `false` döner.
+2. Aynı `scoring` ile `classify(computeScore(answers, scoring), scoring)` → mesaj anahtarı → `tests.<id>.messages.<anahtar>` → `#result-content`. `showScore` ise başlıkla gövde arasına `result.score` satırı (`.result-score`) eklenir.
 
 3. panel açılır, `requestAnimationFrame` içinde `scratch.reset()`; `opts.revealed` ise hemen ardından `scratch.revealNow()`
 4. Kapak açılınca (`onReveal`): `hint` ve `skipBtn`'ın parent'ı gizlenir, `actions` gösterilir
@@ -245,18 +259,25 @@ Döndürür: `{ show(answers, testId, { revealed }), hide() }`.
 ### `scratch.js`: `createScratch({ canvas, onReveal, getLabel, threshold=0.5, brush=36 })`
 Döndürür: `{ reset(), revealNow(), relabel() }`.
 
-- Kapak canvas'a çizilir. Renkleri `getComputedStyle(documentElement)` üzerinden `--scratch-a`, `--scratch-b`, `--scratch-ink` okur (çizim anında, bu yüzden tema değişince kapak kendiliğinden yenilenmez, bkz. `theme.js > onThemeChange`). Yazı `getLabel()` ile gelir.
+- Kapak canvas'a çizilir. Renkleri `getComputedStyle(documentElement)` üzerinden `--scratch-a`, `--scratch-b`, `--scratch-ink` okur (çizim anında okunur; dil/tema değişiminde kapak henüz kazınmamışsa yeniden çizilebilir). Yazı `getLabel()` ile gelir.
 - Silme: `destination-out`, pointer events, `setPointerCapture`. Silinen alan oranı 250 ms'de bir ve bırakınca örneklenir (her 16. piksel). Oran `threshold`'u geçince `reveal()`.
 - `touched` bayrağı: silmeye başlanınca `relabel()` kapağı yeniden çizmez (silinmiş alan kaybolmasın).
-- Pencere boyutu değişince (silinmemişse) kapak yeniden çizilir.
+- Pencere boyutu değişince, kart henüz açılmamışsa ve o an çizim sürmüyorsa kapak yeniden çizilir. **Bilinen davranış:** bu dinleyici `touched` bayrağına bakmaz; kısmen kazınmış kapak boyut değişiminde sıfırlanabilir.
 
 ### `scoring.js`
-- `maxScore(scoring, scaleSize)`: en yüksek skor (`Σ ağırlık × (scaleSize - 1)`), skor satırındaki "/ Y" için.
-- `computeScore(answers, scoring)` ağırlıklı toplam. `scoring` her zaman açıkça verilir (varsayılanı yok). Cevap değeri = seçeneğin sırası (0'dan).
+- `isValid(answers, scoring, scaleSize)`: cevap sayısını ve her cevabın aralığını doğrular. `result.js` sonuç göstermeden önce çağırır. ESS'de eksik madde geçerli toplama dönüşmez.
+- `maxScore(scoring, scaleSize)` / `minScore(scoring, scaleSize)`: olası en yüksek / en düşük skor (skor satırındaki "/ Y" için).
+- `computeScore(answers, scoring)`: `Σ (cevap + answerOffset) × ağırlık + constant`. `answerOffset` ve `constant` varsayılanı `0`; negatif ağırlık desteklenir; toplam yukarı yuvarlanır. `scoring` her zaman açıkça verilir (varsayılanı yok). Arayüzdeki cevap değeri = seçeneğin sırası (0'dan).
 - `classify(score, scoring)` iki biçimi destekler:
-  - `{ weights, threshold }`: `"suspect" | "unlikely"`, `threshold == null` ise her zaman `"neutral"`.
+  - `{ weights, threshold }`: `"suspect" | "unlikely"`; `suspectBelow: true` ise eşiğin altındaki skor (`skor < threshold`) şüpheli sayılır. `threshold == null` ise her zaman `"neutral"`.
   - `{ weights, bands: [{ min, key }, ...] }` (artan `min` sırasında): skor `>= min` olan son bandın `key`'i, hiçbiri yoksa `"neutral"`.
-- Durum: `TESTS.sns.scoring` içindeki `weights` ve `threshold` geçici değerler (hepsi 1 / `null`). Doğrulanmış değerlerle `config.js` içinde değiştirilecek. `TESTS.ess.scoring` kaynaktan doğrulanmıştır (ESS Scaling and Scoring v2.0, Mapi Research Trust, Ağustos 2017): ağırlık yok, toplam 0–24, bantlar 0–5 / 6–10 / 11–12 / 13–15 / 16–24.
+- **SNS** (`TESTS.sns.scoring`): ağırlıklar `[6, 9, -5, -11, -13]`, `constant: 20`. Arayüz cevapları `0–4`, formül `1–5` kullandığı için `answerOffset: 1`. `threshold: 0`, `suspectBelow: true` (skor `< 0` → `suspect`). `showScore` kapalı, ham skor kullanıcıya gösterilmez.
+- **ESS** (`TESTS.ess.scoring`) kaynaktan doğrulanmıştır (ESS Scaling and Scoring v2.0, Mapi Research Trust, Ağustos 2017): 8 madde, her biri `0–3`, ağırlıklar sekiz adet `1`, toplam 0–24, `showScore: true`, bantlar 0–5 `lowerNormal` / 6–10 `higherNormal` / 11–12 `mild` / 13–15 `moderate` / 16–24 `severe`.
+
+### Birim testleri
+`js/scoring.test.js`, `node:test` ve `node:assert/strict` ile ESS/SNS için puan formülünü, uç değerleri, sınıflandırma sınırlarını ve cevap geçerliliğini kontrol eder. Çalıştırma: `node --test js/scoring.test.js`.
+
+Not: test dosyasındaki ESS/SNS konfigürasyonları `config.js` içindeki nesnelerin elle kopyasıdır; zamanla ayrışabilir.
 
 ---
 
@@ -285,10 +306,10 @@ Ayar: `config.js > STATS = { workerUrl, goatcounterCode, paths: { view, testDone
 | | Görevi | Ayar | Boşsa |
 |---|---|---|---|
 | **Worker** (`worker/`) | Home'daki sayıların kaynağı ve asıl sayım | `workerUrl` | sayı kutusu görünmez, Worker'a istek gitmez |
-| **GoatCounter** | Arka planda ek sayım. Sayılar bundan **okunmaz** | `goatcounterCode` | hiçbir istek gitmez |
+| **GoatCounter** | Arka planda ek sayım. Sayılar bundan **okunmaz** | `goatcounterCode` (şu an `config.js`'te yorum satırı, yani kapalı) | hiçbir istek gitmez |
 
 - `statsEnabled` = ikisinden biri doluysa `true`. `site.js` buna bakıp footer'a `footer.statsNote` ekler.
-- **Sayılmayan ziyaretler** (`shouldTrack`, iki parça için de geçerli): `localhost` / `127.0.0.1` / `file://`, `navigator.doNotTrack === "1"`, `navigator.globalPrivacyControl`, `localStorage.skipgc` dolu olan tarayıcı (kendi ziyaretini saymamak için `localStorage.setItem("skipgc","t")`). Sayılmayan ziyaretçi sayıları yine de görür (sadece okuma).
+- **Sayılmayan ziyaretler** (`shouldTrack`, iki parça için de geçerli): `localhost` / `127.0.0.1` / `[::1]`, `navigator.doNotTrack === "1"`, `navigator.globalPrivacyControl`, `localStorage.skipgc` dolu olan tarayıcı (kendi ziyaretini saymamak için `localStorage.setItem("skipgc","t")`). Sayılmayan ziyaretçi sayıları yine de görür (sadece okuma).
 - **Sayfa açılışı:** Sayılan ziyarette tek istek: `POST <workerUrl>/tally/view` (artırır ve güncel `{views, tests, byTest}` döndürür). Sayılmayan ziyarette `GET <workerUrl>/tally`. Ek olarak GoatCounter doluysa `new Image().src = https://<kod>.goatcounter.com/count?p=/&rnd=...`.
 - **Test bitişi:** `trackTestCompleted(id)` her test için sayfa yüklemesi başına en fazla bir kez: `POST <workerUrl>/tally/test/<id>` (dönen sayılarla kutu güncellenir) ve GoatCounter'a `p=/test-completed/<id>`. Aynı testin cevaplarını düzenleyip yeniden bitirmek tekrar saymaz, farklı bir test ayrıca sayılır.
 - **Home kutusu:** "tamamlanan test" tüm testlerin toplamıdır (`tests`). Test başına sayılar yanıtta `byTest` olarak gelir, şu an ekranda gösterilmiyor.
@@ -301,9 +322,9 @@ Cloudflare Worker + D1. Site dosyalarından bağımsız yayınlanır (`worker/RE
 
 - `GET /tally` → `{ "views": n, "tests": n, "byTest": { "<id>": n } }` (`tests` = `byTest` toplamı)
 - `POST /tally/view` ve `POST /tally/test/<id>` → ilgili sayaç +1, güncel sayıları döndürür. Artırma `INSERT ... ON CONFLICT DO UPDATE SET n = n + 1` ile tek `batch` içinde yapılır, eşzamanlı isteklerde sayı kaybolmaz.
-- `<id>` yalnızca `worker/src/index.js > TEST_IDS` listesindeyse (şu an `sns`, `ess`) kabul edilir, değilse 404 (rastgele id ile tabloya satır eklenemez). Eski `POST /tally/test` rotası kaldırıldı (404).
-- Veri: `counters(name TEXT PRIMARY KEY, n INTEGER)` tablosu, satırlar `views` ve her test için `test_<id>`. Satırlar ilk artırmada kendiliğinden oluşur. IP, kimlik, cevap saklanmaz.
-- **Origin filtresi:** `POST` yalnızca `Origin` başlığı `wrangler.toml > ALLOWED_ORIGINS` listesindeyse kabul edilir, aksi halde 403. İzinli origin `Access-Control-Allow-Origin` ile geri yansıtılır, izinsiz origin yanıtı tarayıcıdan okuyamaz. Bu bir güvenlik önlemi değil, tesadüfi ve başka siteden gelen artırmaları engelleyen filtredir: `Origin` başlığını taklit eden biri sayıyı artırabilir. IP başına sınır yoktur.
+- `<id>` yalnızca `worker/src/index.js > TEST_IDS` listesindeyse (şu an `sns`, `ess`) kabul edilir, değilse 404 (rastgele id ile tabloya satır eklenemez). Yeni test eklenince `TEST_IDS`, `config.js > TESTS` ile senkron güncellenir ve Worker yeniden yayınlanır. Eski `POST /tally/test` rotası kaldırıldı (404).
+- Veri: `counters(name TEXT PRIMARY KEY, n INTEGER)` tablosu, satırlar `views` ve her test için `test_<id>`. Satırlar ilk artırmada `INSERT ... ON CONFLICT` ile oluşur. `schema.sql` ayrıca başlangıçta `views` ve `tests` satırlarını ekler; ancak Worker `tests` satırını okumaz (toplamı `test_<id>` satırlarından hesaplar), yani `tests` başlangıç satırı eski modelden kalan, kullanılmayan bir kayıttır. IP, kimlik, cevap saklanmaz.
+- **Origin filtresi:** `POST` yalnızca `Origin` başlığı `wrangler.toml > ALLOWED_ORIGINS` listesindeyse kabul edilir, aksi halde 403. İzinli origin `Access-Control-Allow-Origin` ile geri yansıtılır, izinsiz origin yanıtı tarayıcıdan okuyamaz. Bu bir güvenlik önlemi değil, tesadüfi ve başka siteden gelen artırmaları engelleyen filtredir: `Origin` başlığını taklit eden biri sayıyı artırabilir. IP başına ya da başka bir hız sınırı yoktur. `GET /tally` okuması origin doğrulaması olmadan çalışır.
 - Rota adları (`/tally`) reklam engelleyici listelerinde sık geçen sözcüklerden bilerek kaçınır. Engellenme olursa kendi alan adına bağlı Worker rotası en sağlam çözümdür.
 - Cloudflare ücretsiz plan limitleri: günde 100.000 Worker isteği, D1'de günde 100.000 satır yazma. Limit aşılırsa istekler hata verir, site bozulmaz (kutu gizlenir).
 
@@ -377,21 +398,21 @@ Dışa aktarır: `initRichText()`. Veri: `references.js > REFERENCES = { anahtar
 | Soru metni düzenleme | `locales/*.js > tests.<id>.questions` |
 | Soru ekleme/çıkarma | her `locales/*.js > tests.<id>.questions` + `config.js > TESTS[id].questionCount` + `scoring.weights` |
 | Seçenek sayısını değiştirme | her `locales/*.js > tests.<id>.scale` + `TESTS[id].scaleSize` |
-| Skor katsayıları, eşik, bantlar | `config.js > TESTS[id].scoring` |
+| Skor katsayıları, eşik, bantlar | `config.js > TESTS[id].scoring` (+ `scoring.test.js` içindeki elle kopya) |
 | Sonuç mesajları | `locales/*.js > tests.<id>.messages` |
 | Sonuç mantığı | `scoring.js` |
 | Varsayılan (ilk açılan) test | `config.js > DEFAULT_TEST` |
 | Testin yönergesi, telif satırı | `locales/*.js > tests.<id>.intro`, `tests.<id>.copyright` (lisanslı metinse düzenlenmez) |
 | Sonuçta skor gösterme / gizleme | `config.js > TESTS[id].showScore` |
 | Seçenek numarası 0'dan / 1'den başlasın | `config.js > TESTS[id].keyBase` |
-| Yeni test ekleme | aşağıdaki "Yeni test ekleme" |
+| Yeni test ekleme | `config.js > TESTS`, her `locales/*.js > tests.<id>`, `worker/src/index.js > TEST_IDS` (sonra Worker'ı yeniden yayınla) |
 | Kazı-kazan davranışı | `scratch.js` (`threshold`, `brush`), renkler `base.css` (`--scratch-*`) |
 | Renk, font, ölçü | `base.css` `:root` ve koyu tema (iki yerde: media query bloğu ve `:root[data-theme="dark"]`, elle senkron) |
 | Tema butonu (ikon, yer) | `index.html > #theme-btn` + `layout.css > .theme-btn` |
 | Tema butonu etiketi | `locales/*.js > theme.toggle` (+ `index.html` İngilizce yedeği) |
 | Tema saklama anahtarı | `theme.js > STORAGE_KEY` ve `index.html > <head>` satır içi script (iki yerde) |
 | Tema değişince bir şey yapma | `theme.js > onThemeChange(fn)` (ör. `main.js` içinden `scratch.relabel()`) |
-| Arka plan | `background.css` + `index.html > #bg` |
+| Arka plan | şu an arka plan CSS'i yok; `index.html > #bg` boş dekoratif katman |
 | Yeni bölüm ekleme | `index.html` (section id) + `nav` linki + `locales > nav.*` anahtarı |
 | Yeni yerelleştirilen HTML metni | elemana `data-i18n="anahtar"` + tüm dil dosyalarına anahtar |
 | Menü/header düzeni | `layout.css` (`--header-h`, `.header-tools`, `36rem` breakpoint) |
