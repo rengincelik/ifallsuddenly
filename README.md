@@ -1,27 +1,65 @@
-# Narkolepsi
+# I Fall Suddenly
 
-Narkolepsi Tip 1 için İsviçre Narkolepsi Ölçeği (SNS) tabanlı, 2 dakikalık ön tarama sayfası. Çerçevesiz, derleme adımsız statik site: HTML, CSS ve ES modules. Türkçe ve İngilizce.
+**[Visit the live website](https://rengincelik.github.io/ifallsuddenly/)**
 
-Bu sayfa bir teşhis aracı değildir.
+*Can't sleep at night. Can't stay awake by day.*  
+*Sleep isn't always as simple as it seems.*
 
-> Geliştirme aşamasında. Ayrıntılı açıklama proje bitince eklenecek.
+I Fall Suddenly is a bilingual (English and Turkish) awareness project about narcolepsy. It aims to make the condition and its symptoms easier to understand through accessible information and interactive screening tools.
 
-## Yerelde çalıştırma
+The website includes:
 
-ES modules `file://` ile çalışmaz, klasörde yerel bir sunucu açmak gerekir:
+- **Narcolepsy screening:** A preliminary screening based on the Swiss Narcolepsy Scale (SNS).
+- **Daytime sleepiness assessment:** The Epworth Sleepiness Scale (ESS).
+- **Symptom guide:** Explanations of common narcolepsy symptoms.
+- **Resources:** Further information and useful references.
+- **Bilingual interface:** English and Turkish support.
+- **Light and dark themes:** A theme option for comfortable reading.
+- **Responsive design:** Layouts adapted for desktop and mobile devices.
 
-```bash
-python -m http.server 8000
+> This website is for educational and awareness purposes only. Screening results are not a diagnosis and should not replace professional medical advice.
+
+## Technology
+
+Built with:
+
+- HTML
+- CSS
+- Vanilla JavaScript (ES modules)
+- Cloudflare Workers and D1 for backend functionality
+- GitHub Pages for deployment
+
+No frontend framework, package manager, or build step is required.
+
+
+## Project structure
+
+```text
+.
+├── index.html
+├── css/
+├── js/
+│   └── locales/
+├── assets/
+└── worker/
 ```
 
-Sonra tarayıcıda `http://localhost:8000` adresini aç.
+## ESS Licensing
 
-## Daha fazlası
+The Epworth Sleepiness Scale (ESS) is used under a **Non-Commercial Educational License**.
 
-- [`ARCHITECTURE.md`](ARCHITECTURE.md): teknik yapı
-- [`TODO.md`](TODO.md): yapılacaklar
+- **Copyright:** © Murray Johns 1990–1997.
+- **License:** Non-Commercial Educational License.
+- **Agreement ID:** 154560 (ePROVIDE™).
+- **Distributed by:** Mapi Research Trust, Lyon, France.
+- **License information:** [ePROVIDE™](https://eprovide.mapi-trust.org).
 
-### Epworth Sleepiness Scale (ESS)
-* **Copyright:** © Murray Johns 1990–1997.
-* **Licensing:** Used under Non-Commercial Educational License (ePROVIDE™ Agreement ID: 154560).
-* **Distributed by:** Mapi Research Trust, Lyon, France ([eprovide.mapi-trust.org](https://eprovide.mapi-trust.org)).
+This license applies to the use of the ESS questionnaire and does not represent the license for the entire I Fall Suddenly project.
+
+## Disclaimer
+
+I Fall Suddenly is an independent educational and awareness project. It does not provide medical diagnoses, treatment recommendations, or emergency services.
+
+## Contributing
+
+Suggestions, corrections, and contributions that help improve the accuracy and accessibility of the information are welcome.
