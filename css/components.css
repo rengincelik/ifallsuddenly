@@ -226,6 +226,13 @@ sup { line-height: 0; }
 .refs li { margin-bottom: .4rem; overflow-wrap: anywhere; transition: background-color .6s; }
 .refs li.flash { background: var(--accent-soft); }
 
+.refs-details[open] > summary {
+	display: none;
+}
+/* İçindeki [data-refs] gizliyse (kaynak yoksa) tüm details kutusunu saklar */
+.refs-details:has([data-refs][hidden]) {
+	display: none;
+}
 /* Silerek açılan sonuç */
 .scratch-card {
   position: relative;

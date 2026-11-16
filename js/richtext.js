@@ -150,10 +150,19 @@ function onCiteClick(e) {
   const target = document.getElementById(a.hash.slice(1));
   if (!target) return;
 
+	const details = target.closest("details");
+	if (details && !details.open) {
+		details.open = true;
+	}
+
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  target.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
-  target.classList.add("flash");
-  setTimeout(() => target.classList.remove("flash"), 1600);
+
+	// DOM'un yeni yüksekliği hesaplaması için bir kare (frame) bekleyip kaydır
+	requestAnimationFrame(() => {
+		target.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+		target.classList.add("flash");
+		setTimeout(() => target.classList.remove("flash"), 1600);
+	});
 }
 
 export function initRichText() {

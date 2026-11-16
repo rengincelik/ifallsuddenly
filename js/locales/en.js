@@ -20,7 +20,8 @@ export default {
 	theme: { toggle: "Dark theme" },
 
   refs: {
-    title: "Sources",
+	  prompt: "Click to view sources for this section",
+	  title: "Sources",
     cite: "Source {n}",
   },
 

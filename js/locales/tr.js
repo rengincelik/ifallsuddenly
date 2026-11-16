@@ -21,6 +21,7 @@ export default {
 	theme: { toggle: "Koyu tema" },
 
   refs: {
+	  prompt: "Bu bölümdeki kaynakları görmek için tıklayın",
     title: "Kaynaklar",
     cite: "Kaynak {n}",
   },

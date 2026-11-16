@@ -286,3 +286,18 @@
   .brand { font-size: 1.05rem; }
   .section { padding: 3.5rem 0; }
 }
+
+.bolum-ayirici {
+	display: flex;
+	justify-content: center; /* İçindeki görseli yatayda tam ortalar */
+	align-items: center;     /* Dikey hizalamayı da dengeler */
+	width: 100%;             /* Kapsayıcının tüm satır genişliğini kaplamasını sağlar */
+	margin: clamp(2rem, 5vw, 4rem) 0; /* Üst ve alt bölümlerle arasına esnek boşluk koyar */
+}
+
+.bolum-ayirici img {
+	max-width: 100%;                 /* Taşmayı önler */
+	height: auto;                    /* En-boy oranını korur */
+	display: block;                  /* Altındaki görünmez satır boşluğunu sıfırlar */
+	width: clamp(240px, 70vw, 800px); /* Ekrana göre otomatik büyür/küçülür */
+}

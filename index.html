@@ -101,6 +101,19 @@
 		</div>
 	</section>
 	
+	<!-- timeline-image -->
+	<section id="timeline" >
+		<div class="bolum-ayirici">
+			<picture>
+				<!-- Ekran genişliği 768px ve altındaysa (Mobil) bunu yükler -->
+				<source media="(max-width: 768px)" srcset="assets/logo.png">
+				<!-- Masaüstünde veya yukarıdaki koşul tutmazsa varsayılan olarak bunu yükler -->
+				<img src="assets/timeline.png" alt="" aria-hidden="true" loading="lazy">
+			</picture>
+		</div>
+	</section>
+
+	
 	<!-- NARCOLEPSY -->
 	<section id="narcolepsy" class="section">
 		<div class="container">
@@ -109,7 +122,10 @@
 			<!-- Tanım: kutusuz kısa giriş (richtext.js, narcolepsy.intro). Kendi kaynak numaraları vardır. -->
 			<div class="rich-intro" data-rich-block="narcolepsy-intro">
 				<div data-i18n-rich-list="narcolepsy.intro"></div>
-				<div class="refs" data-refs hidden></div>
+				<details class="refs-details">
+					<summary data-i18n-rich="refs.prompt"></summary>
+					<div class="refs" data-refs hidden></div>
+				</details>
 			</div>
 
 			<!-- Belirti akışı: symptoms.js doldurur (narcolepsy.symptoms), veri yoksa gizli kalır -->
@@ -122,7 +138,10 @@
 
 			<div class="scroll-box" data-rich-block="narcolepsy" tabindex="0" role="region" aria-labelledby="narcolepsy-title">
 				<div data-i18n-rich-list="narcolepsy.body"></div>
-				<div class="refs" data-refs hidden></div>
+				<details class="refs-details">
+					<summary data-i18n-rich="refs.prompt"></summary>
+					<div class="refs" data-refs hidden></div>
+				</details>
 			</div>
 		</div>
 	</section>

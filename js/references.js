@@ -1,9 +1,5 @@
 // Kaynak kayıtları (dilden bağımsız). Metinde [@anahtar] ile kullanılır.
 // { anahtar: { text, url? } }  url yalnızca http(s):// ile başlarsa link olur.
-// İlk 16 kaynak 2026-11-10'da PubMed / yayıncı / DOI kayıtlarıyla karşılaştırıldı.
-// han2011, maski2021, maski2022, mignot2002, ohayon1996, rogers2001, roth2013, sharpless2011,
-// sharpless2016, takahashi2003 ve dauvilliers2025 2026-11-15'te arama sonuçlarıyla kontrol edildi.
-// Yayına almadan önce bu on bir kaydın linklerini bir kez elle aç.
 export const REFERENCES = {
   aasm2014: {
     text: "American Academy of Sleep Medicine (AASM). (2014). International Classification of Sleep Disorders (3rd ed.). Darien, IL: AASM.",
