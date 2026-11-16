@@ -60,12 +60,21 @@ export default {
     // Tarayıcının yanıtı okuyabilmesi için izinli origin geri yansıtılır
     const cors = { Vary: "Origin", ...(originOk ? { "Access-Control-Allow-Origin": origin } : {}) };
 
-    if (request.method === "OPTIONS") {
-      return new Response(null, {
-        status: 204,
-        headers: { ...cors, "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Max-Age": "86400" },
-      });
-    }
+	  if (request.method === "OPTIONS") {
+		  if (!originOk) {
+			  return new Response(null, { status: 403 });
+		  }
+
+		  return new Response(null, {
+			  status: 204,
+			  headers: {
+				  ...cors,
+				  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+				  "Access-Control-Allow-Headers": "Content-Type",
+				  "Access-Control-Max-Age": "86400",
+			  },
+		  });
+	  }
 
     const path = url.pathname.replace(/\/+$/, "");
 
@@ -82,8 +91,17 @@ export default {
           counter = `test_${rest.slice("test/".length)}`;
         }
         if (!counter) return json({ error: "not found" }, 404, cors);
-        if (!originOk) return json({ error: "forbidden" }, 403, cors);
-        return json(await totals(env.DB, counter), 200, cors);
+		  if (!originOk) return json({ error: "forbidden" }, 403, cors);
+
+		  const { success } = await env.TALLY_LIMITER.limit({
+			  key: request.headers.get("CF-Connecting-IP") || "unknown",
+		  });
+
+		  if (!success) {
+			  return json({ error: "rate limit exceeded" }, 429, cors);
+		  }
+
+		  return json(await totals(env.DB, counter), 200, cors);
       }
 
       return json({ error: "not found" }, 404, cors);

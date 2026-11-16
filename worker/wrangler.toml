@@ -5,10 +5,14 @@ compatibility_date = "2025-10-01"
 [vars]
 # POST'a izin verilen siteler, virgülle ayrılmış, sonunda "/" olmadan.
 # Yayın adresini (GitHub Pages ya da kendi alan adın) buraya ekle.
-
 ALLOWED_ORIGINS = "http://localhost:63342,http://127.0.0.1:8000,https://rengincelik.github.io"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "narkolepsi-tally"
 database_id = "da2d6d91-aaf5-4d67-a52d-25dd3a256191"
+
+[[ratelimits]]
+name = "TALLY_LIMITER"
+namespace_id = "2026111701"
+simple = { limit = 30, period = 60 }
