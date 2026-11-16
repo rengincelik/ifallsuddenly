@@ -41,16 +41,12 @@ function gcHit(path) {
 async function callWorker(method, path) {
 	const res = await fetch(`${workerUrl}${path}`, {
 		method,
+		headers: method === "POST"
+			? { "Content-Type": "application/json" }
+			: {},
 		cache: "no-store",
 		keepalive: method === "POST",
 	});
-	if (!res.ok) throw new Error(`HTTP ${res.status}`);
-	const data = await res.json();
-	const views = Number(data.views);
-	const tests = Number(data.tests); // tüm testlerin toplamı
-	if (!Number.isFinite(views) || !Number.isFinite(tests)) throw new Error("beklenmeyen yanıt");
-	return { views, tests, byTest: data.byTest ?? {} };
-}
 
 // --- Sayı animasyonu (0'dan değere sayarak yükselir) ---
 // shown: ekranda o an yazan değer. Değer değişince (ör. test bitince) kaldığı yerden yeni değere sayar.
