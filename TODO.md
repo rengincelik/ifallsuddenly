@@ -16,22 +16,16 @@ Durumlar GitHub `main` koduna göre işaretlidir. Dosya yolları ve anahtar adla
 
 ## 1. P0 — Yayın öncesi
 
-- [ ] **HTML meta description yer tutucusunu kaldır** (`index.html`). Şu an `content="........"`. `locales/en.js > meta.description` ve `locales/tr.js` karşılığıyla tutarlı, gerçek bir statik yedek metin yaz. JS kapalıyken ve crawler'larda da anlamlı olmalı. Açıklama SNS ve ESS'nin ikisini de doğru tanımlamalı (eskiden yalnızca "Swiss Narcolepsy Scale" geçiyordu).
-- [ ] **Open Graph ve Twitter URL'lerini doğrula/güncelle** (`index.html`). `og:url`, `og:image`, `twitter:image` hâlâ `https://rengincelik.github.io/NT_1/...` adresini kullanıyor. Güncel Pages URL'sini veya özel domaini doğrulayıp tüm metadata'yı aynı kök adresle eşleştir. `og:image:alt` ve `twitter:image` aynı dosyayı gösterdiği için birlikte düzelir.
-- [ ] **OG başlık/açıklama tutarlılığı** (`index.html`). Statik OG metni Türkçe, `<title>` / description ise i18n ile sonradan değişiyor. Crawler JS çalıştırmadığı için paylaşım dili bilinçli seçilmeli (tek dil mi, `?lang=` için ayrı sayfa mı).
-- [ ] **Canlı paylaşım önizlemesini doğrula (WhatsApp).** `assets/og-image.png` repoda mevcut, ama metadata eski `NT_1` yolunu gösteriyor. Güncel URL'de görselin açıldığını doğrula. Kontrol listesi:
-  - 1200×630, dosya küçük (~300 KB altı güvenli, 600 KB üstü çoğu zaman gösterilmez).
-  - Mutlak `https://` adres, dosya adı büyük/küçük harf uyumlu (Pages duyarlı).
-  - WhatsApp önizlemeyi önbelleğe alır: yeni dosya adı veya `?v=2` kullan, linki parametreli dene, Facebook Sharing Debugger ile önbelleği yenile.
+
 - [ ] **SNS/ESS sonuç mesajlarını son kez gözden geçir** (`tests.sns.messages.suspect`, `unlikely`; ESS karşılıkları). Sonuç tanı veya kesin dışlama gibi anlaşılmamalı: SNS'de `unlikely` "narkolepsi yok" demek değildir, ESS tek başına narkolepsi taraması değildir. Geçici `neutral` mesajı varsa kaldır veya hata durumuna çevir (`threshold` doluyken kullanılmaz).
 - [ ] **Yayın URL'si ve Worker origin ayarını birlikte doğrula.** `worker/wrangler.toml > ALLOWED_ORIGINS` şu an yalnızca `https://rengincelik.github.io`. Özel domain kullanılırsa eklenmeli.
 - [ ] **Favicon ve `theme-color`** *(eski listeden)*. Açık/koyu tema için `media` özellikli iki etiket ya da `theme.js`'ten güncelleme.
-- [ ] **QR kartı** *(eski listeden)*. Link kesinleşince kısa ve `?lang=tr` içeren sürümle QR üret, basılacak kartı tasarla.
+
 - [ ] **Yer tutucu metin taraması** *(eski listeden)*. `config.js`, `footer.role`, `home.tagline`, `tests.*.messages.neutral` içinde yer tutucu kalmadığını doğrula.
 
 ## 2. P1 — Teknik doğruluk ve sağlamlık
 
-- [ ] **Scratch Card resize durumunu düzelt** (`js/scratch.js`). `touched` bayrağı kısmen kazınmış kapağı korumak için var, ama `resize` dinleyicisi bunu kontrol etmiyor. Kısmen kazınmış kart pencere boyutu değişince yeniden boyanmamalı veya silinen alan korunmalı.
+
 - [ ] **Worker D1 şemasını güncel modele hizala** (`worker/schema.sql`). Şema hâlâ eski `tests` toplam satırını ekliyor; Worker toplamı `test_<id>` satırlarından hesaplıyor. Eski satırı kaldır veya neden tutulduğunu belgele.
 - [ ] **Worker README yerel origin örneklerini düzelt** (`worker/README.md`, `worker/wrangler.toml`). README `http://localhost:8000`'in varsayılan izinli olduğunu söylüyor, `ALLOWED_ORIGINS`'te yok. Listeye ekle ya da README'yi gerçek ayarla eşleştir.
 - [ ] **Skorlama testlerini gerçek config'e bağla** (`js/scoring.test.js`). SNS/ESS konfigürasyonları test dosyasında elle kopyalanmış; `config.js > TESTS` doğrudan import edilsin. Sınır değerleri (eşiğin tam üstü/altı, tüm 0, tüm maksimum, `bands` sınırları ve en düşük bandın altı) kapsanıyor mu kontrol et.

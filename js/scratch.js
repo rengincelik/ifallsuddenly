@@ -121,8 +121,8 @@ export function createScratch({ canvas, onReveal, getLabel = () => "", threshold
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      if (!revealed && !drawing) paintCover();
-    }, 150);
+		if (!revealed && !drawing && !touched) paintCover();
+		}, 150);
   });
 
   return {
