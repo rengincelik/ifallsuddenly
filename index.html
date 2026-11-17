@@ -81,7 +81,7 @@
 	<!-- ABOUT -->
 	<section id="about" class="section">
 		<div class="container">
-			<div class="scroll-box" data-rich-block="about" tabindex="0" role="region" data-i18n-aria-label="nav.about" aria-label="About me">
+			<div class="scroll-box" id="about-scroll-box" data-rich-block="about" tabindex="0" role="region" data-i18n-aria-label="nav.about" aria-label="About me">
 				<h2 class="lead" data-i18n="about.lead"></h2>
 				<p class="big" data-i18n-rich="about.big"></p>
 				<p data-i18n-rich="about.p1" ></p>
@@ -93,6 +93,12 @@
 				<p data-i18n-rich="about.p7"></p>
 				<div class="refs" data-refs hidden></div>
 			</div>
+			<button type="button" class="btn btn-ghost scroll-toggle"
+					data-scroll-toggle="about-scroll-box"
+					aria-controls="about-scroll-box"
+					aria-expanded="false"
+					hidden></button>
+			
 		</div>
 	</section>
 	
@@ -130,14 +136,19 @@
 				<ol class="symptom-flow" data-symptom-list></ol>
 				<p class="symptoms-note muted" hidden></p>
 			</div>
-
-			<div class="scroll-box" data-rich-block="narcolepsy" tabindex="0" role="region" aria-labelledby="narcolepsy-title">
+			
+			<div class="scroll-box" id="narcolepsy-scroll-box" data-rich-block="narcolepsy" tabindex="0" role="region" aria-labelledby="narcolepsy-title">
 				<div data-i18n-rich-list="narcolepsy.body"></div>
 				<details class="refs-details">
 					<summary data-i18n-rich="refs.prompt"></summary>
 					<div class="refs" data-refs hidden></div>
 				</details>
 			</div>
+			<button type="button" class="btn btn-ghost scroll-toggle"
+					data-scroll-toggle="narcolepsy-scroll-box"
+					aria-controls="narcolepsy-scroll-box"
+					aria-expanded="false"
+					hidden></button>
 		</div>
 	</section>
 	

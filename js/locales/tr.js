@@ -20,6 +20,11 @@ export default {
 
 	theme: { toggle: "Koyu tema" },
 
+	scrollBox: {
+		expand: "Daha fazla göster",
+		collapse: "Daralt",
+	},
+
   refs: {
 	  prompt: "Bu bölümdeki kaynakları görmek için tıklayın",
     title: "Kaynaklar",

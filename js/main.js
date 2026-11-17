@@ -11,6 +11,7 @@ import { initStats, trackTestCompleted } from "./stats.js";
 import { initRichText } from "./richtext.js";
 import { initTheme, onThemeChange } from "./theme.js";
 import { initSymptoms } from "./symptoms.js";
+import { initScrollBoxes } from "./scrollbox.js";
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -21,6 +22,7 @@ initTheme();
 initSite();
 initShare();
 initRichText();
+initScrollBoxes();
 initSymptoms();
 initStats(); // beklenmez: sayılar gelince kutu kendi kendine açılır
 

@@ -19,6 +19,12 @@ export default {
   lang: { label: "Language" },
 	theme: { toggle: "Dark theme" },
 
+	scrollBox: {
+		expand: "Show more",
+		collapse: "Collapse",
+	},
+
+
   refs: {
 	  prompt: "Click to view sources for this section",
 	  title: "Sources",

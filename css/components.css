@@ -406,3 +406,52 @@ sup { line-height: 0; }
 	}
 	.symptom::before { left: 1.1rem; top: -2.125rem; }
 }
+
+/* Scroll-box açma / kapama */
+.scroll-box {
+	max-height: 220px;
+	overflow-y: auto;
+	transition: max-height 0.35s ease;
+}
+
+.scroll-box.is-expanded {
+	max-height: 500px;
+}
+
+.scroll-toggle {
+	display: block;
+	margin: .75rem auto 0;
+	padding: .55rem 1.1rem;
+	font-size: .9rem;
+}
+
+.scroll-toggle[hidden] {
+	display: none;
+}
+
+/* Scrollbar: normalde görünmez, kaydırırken görünür */
+.scroll-box {
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
+}
+
+.scroll-box.is-scrolling {
+	scrollbar-color: var(--muted) transparent;
+}
+
+.scroll-box::-webkit-scrollbar {
+	width: 7px;
+}
+
+.scroll-box::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+	background: transparent;
+	border-radius: 999px;
+}
+
+.scroll-box.is-scrolling::-webkit-scrollbar-thumb {
+	background: var(--muted);
+}
