@@ -47,6 +47,11 @@ async function callWorker(method, path) {
 		cache: "no-store",
 		keepalive: method === "POST",
 	});
+	if (!res.ok) {
+		throw new Error(`Worker HTTP error! status: ${res.status}`);
+	}
+	return res.json();
+};
 
 // --- Sayı animasyonu (0'dan değere sayarak yükselir) ---
 // shown: ekranda o an yazan değer. Değer değişince (ör. test bitince) kaldığı yerden yeni değere sayar.
@@ -121,7 +126,6 @@ export function trackTestCompleted(testId) {
 	completedSent.add(testId);
 
 	gcHit(STATS.paths.testDone.replace("{id}", testId));
-
 	if (workerUrl && shouldTrack()) {
 		callWorker("POST", `/tally/test/${encodeURIComponent(testId)}`)
 			.then((c) => { counts = c; render(); })
